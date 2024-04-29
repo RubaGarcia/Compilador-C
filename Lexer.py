@@ -6,22 +6,23 @@ import sys
 class CLexer(Lexer):
     
     #C tokens
-        tokens={OBJECTID, 
-            AUTO, BREAK, CASE, CHAR, CONST, CONTINUE, DEFAULT, DO,
-            DOUBLE, ELSE, ENUM, EXTERN, FLOAT, FOR, GOTO, IF, INT,
-            LONG, REGISTER, RETURN, SHORT, SIGNED, SIZEOF, STATIC,
-            STRUCT, SWITCH, TYPEDEF, UNION, UNSIGNED, VOID, VOLATILE, WHILE
-            INT_CONST, FLOAT_CONST, CHAR_CONST, STRING_CONST}
+    tokens={OBJECTID, 
+        AUTO, BREAK, CASE, CHAR, CONST, CONTINUE, DEFAULT, DO,
+        DOUBLE, ELSE, ENUM, EXTERN, FLOAT, FOR, GOTO, IF, INT,
+        LONG, REGISTER, RETURN, SHORT, SIGNED, SIZEOF, STATIC,
+        STRUCT, SWITCH, TYPEDEF, UNION, UNSIGNED, VOID, VOLATILE, WHILE
+        , INT_CONST, FLOAT_CONST, CHAR_CONST, STRING_CONST, STRING
+        }
         
-        literals = {':', ';', ',', '(', ')', '{', '}', '+', '-', '*', '/', '<', '=', '>', '@', '~', '.'}
+    literals = {':', ',', '(', ')', '{', '}', '+', '-', '*', '/', '<', '=', '>', '@', '~', '.', #';'
+                }
 
-        CARACTERES_CONTROL = [bytes.fromhex(i+hex(j)[-1]).decode('ascii')
-                  for i in ['0', '1']
-                  for j in range(16)] + [bytes.fromhex(hex(127)[-2:]).decode("ascii")]
+    CARACTERES_CONTROL = [bytes.fromhex(i+hex(j)[-1]).decode('ascii')
+              for i in ['0', '1']
+              for j in range(16)] + [bytes.fromhex(hex(127)[-2:]).decode("ascii")]
     
     #ObjectId hace lo mismo que en el manual de C es el identifier
 
-    OBJECTID = r'[a-zA-Z_][a-zA-Z0-9_]*'
 
     #Palabras reservadas de C
     AUTO = r'\b[aA][uU][tT][oO]\b'
@@ -86,6 +87,44 @@ class CLexer(Lexer):
 
     WHILE = r'\b[wW][hH][iI][lL][eE]\b'
 
+    OBJECTID = r'[a-zA-Z_][a-zA-Z0-9_]*'
+    
+    @_(r'\t| |\v|\r|\f')
+    def spaces(self, t):
+        pass
+
+    INT_CONST = r'[0-9]+'
+
+    FLOAT_CONST = r'\b[0-9]+\.[0-9]+\b'
+
+    #STRING_CONST = r'\"[a-zA-Z0-9]*\"'
+    @_(r'\"')
+    def STRING_CONST(self, t):
+        self.begin(StringLexer)
+        pass
+
+    CHAR_CONST = r'\b\'[a-zA-Z0-9]\'\b'
+
+    STRING = r'[Ss][Tt][Rr][Ii][Nn][Gg]'
+
+    @_(r'\n+')
+    def newline(self, t):
+        self.lineno += t.value.count('\n')
+
+    @_(r';')
+    def EOI(self, t):
+        self.lineno += t.value.count(';') 
+
+    @_(r'\/\/')
+    def line_comment(self, t):
+        self.lineno += t.value.count('\n')
+        pass
+    
+    #multiline comment
+    @_(r'\/\*')
+    def multiline_comment(self, t):
+        self.begin(MultilineCommentRemover)
+        pass
     #keywords c99
 
     #keywords GNU
@@ -98,3 +137,132 @@ class CLexer(Lexer):
 
     # CHAR_CONST = r'\b\'[a-zA-Z0-9]\'\b'
 
+class StringLexer(Lexer):
+    tokens ={STRING_CONST, RETORNO, ESCAPADO, X}
+
+    _recursion = ""
+
+    #escapoados
+    @_(r'\\\n')
+    def ESCNL(self,t):
+        self._recursion = "\\n"
+        pass
+
+    @_(r'\\\"')
+    def ESCQ(self,t):
+        self._recursion = "\\\""
+        pass
+
+    @_(r'\t')
+    def TAB(self,t):
+        self._recursion = "\t"
+        pass
+    
+    #TODO revisar en el manual
+    @_(r'\\[^btnrf\\]')
+    def ESCAPADO(self,t):
+        self._recursion = t.value[1:]
+        pass
+
+    @_(r'\\[btnrf\\]')
+    def ESCAPADO2(self,t):
+        self._recursion = t.value
+        pass
+
+    @_(r'\"')
+    def RETORNO(self,t):
+        t.type = "STRING_CONST"
+        t.value = str(self._recursion)
+        self._recursion = ""
+        self.begin(CLexer)
+        t.value = "\""+t.value+"\""
+        return t
+    
+    @_(r'(.\Z)|(.\x00)') #error de string
+    def ERROR(self,t):
+        t.value = "error en fichero"
+        self.begin(CLexer)
+        return t
+    
+    @_(r'\n') #error \ en salto de linea
+    def ERROR2(self,t):
+        t.type = "ERROR"
+        t.value = '"Unterminated string constant"'
+        self._recursion = ""
+        self.begin(CLexer)
+        return t
+    
+    @_(r'.')
+    def X(self,t):
+        self._recursion += t.value
+        pass
+
+class MultilineCommentRemover(Lexer):
+
+    tokens = {}
+    _nestcomments = 0
+
+    @_(r'\/\*')
+    def anidar(self, t):
+        self._nestcomments += 1
+        pass
+    
+    @_(r'\/\*')
+    def ignorar_apertura(self, t):
+        if (t.value[1] == '\n'):
+            self.lineno += 1
+        pass
+
+    @_(r'\*\/')
+    def desanidar(self, t):
+        if self._nestcomments == 0:
+            self.begin(CLexer)
+        else:
+            self._nestcomments -= 1
+        pass
+
+    @_(r'\n')
+    def newline(self, t):
+        self.lineno += 1
+
+    @_(r'.')
+    def CUALQUIERCOSA(self, t):
+        pass
+
+    @_(r'\/\*')
+    def anidar(self, t):
+        self._nestcomments += 1
+        pass
+
+    @_(r'\*\/')
+    def desanidar(self, t):
+        if self._nestcomments == 0:
+            self.begin(CLexer)
+        else:
+            self._nestcomments -= 1
+        pass
+
+    @_(r'\n')
+    def newline(self, t):
+        self.lineno += 1
+
+    @_(r'.')
+    def CUALQUIERCOSA(self, t):
+        pass
+
+if __name__ == '__main__':
+    text = '''
+    int main(){
+        int previo1 = 1;
+        int previo2 = 1;
+        for(int i = 0; i < 10;i++){
+            int fn = previo1 + previo2;
+            previo2 = previo1;
+            previo1 = fn;
+            printf("%d ", fn);
+        }
+    }
+    '''
+    lexer = CLexer()
+    for tok in lexer.tokenize(text):
+        print(tok)

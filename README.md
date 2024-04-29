@@ -1,7 +1,7 @@
 # Compilador-C
 Repo de desarrollo de un compilador de ANSI C para la asignatura de Lenguajes de Programación
 
-Información obtenida del [manual de C](https://www.gnu.org/software/gnu-c-manual/gnu-c-manual.html#Keywords) 
+Información obtenida del [manual de C](https://www.gnu.org/software/gnu-c-manual/gnu-c-manual.html) 
 ## Indice
 1. [Lexer](#Lexer)
 2. [Parser](#Parser)
