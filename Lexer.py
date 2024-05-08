@@ -115,7 +115,7 @@ class CLexer(Lexer):
     def EOI(self, t):
         self.lineno += t.value.count(';') 
 
-    @_(r'\/\/')
+    @_(r'\/\/.*')
     def line_comment(self, t):
         self.lineno += t.value.count('\n')
         pass
@@ -252,16 +252,46 @@ class MultilineCommentRemover(Lexer):
 
 if __name__ == '__main__':
     text = '''
-    int main(){
-        int previo1 = 1;
-        int previo2 = 1;
-        for(int i = 0; i < 10;i++){
-            int fn = previo1 + previo2;
-            previo2 = previo1;
-            previo1 = fn;
-            printf("%d ", fn);
-        }
+    //#include <stdio.h>
+//definición de primeras variables
+
+
+int prev1 = 1;
+int prev2 = 0;
+
+/*
+función de fibonacci
+f(n)=f(n-1)+f(n-2)
+*/
+void fib(int n) {
+    if (n < 3) {
+        return;
     }
+    int fn = prev1 + prev2;
+    prev2 = prev1;
+    prev1 = fn;
+    printf("%d ", fn);
+    return fib(n - 1);
+}
+
+void printFib(int n) {
+    if (n < 1) {
+        printf("Invalid number of terms\n");
+    } else if (n == 1) {
+        printf("%d ", 0);
+    } else if (n == 2) {
+        printf("%d %d", 0, 1);
+    } else {
+        printf("%d %d ", 0, 1);
+        fib(n);
+    }
+}
+
+int main() {
+    int n = 9; // Change this value to print a different number of terms
+    printFib(n);
+    return 0;
+}
     '''
     lexer = CLexer()
     for tok in lexer.tokenize(text):
