@@ -6,16 +6,15 @@ import sys
 class CLexer(Lexer):
     
     #C tokens
-    tokens={OBJECTID, 
-        AUTO, BREAK, CASE, CHAR, CONST, CONTINUE, DEFAULT, DO,
-        DOUBLE, ELSE, ENUM, EXTERN, FLOAT, FOR, GOTO, IF, INT,
-        LONG, REGISTER, RETURN, SHORT, SIGNED, SIZEOF, STATIC,
-        STRUCT, SWITCH, TYPEDEF, UNION, UNSIGNED, VOID, VOLATILE, WHILE
-        , INT_CONST, FLOAT_CONST, CHAR_CONST, STRING_CONST, STRING
+    tokens={
+        AUTO, BREAK, CASE, CHAR, CONST, CONTINUE, DEFAULT, DO,                                      # type: ignore
+        DOUBLE, ELSE, ENUM, EXTERN, FLOAT, FOR, GOTO, IF, INT,                                      # type: ignore
+        LONG, REGISTER, RETURN, SHORT, SIGNED, SIZEOF, STATIC,                                      # type: ignore
+        STRUCT, SWITCH, TYPEDEF, UNION, UNSIGNED, VOID, VOLATILE, WHILE                             # type: ignore
+        , FLOAT_CONST,  INT_CONST, CHAR_CONST, OBJECTID                                             # type: ignore
         }
         
-    literals = {':', ',', '(', ')', '{', '}', '+', '-', '*', '/', '<', '=', '>', '@', '~', '.', #';'
-                }
+    literals = {"=","+","-","*","/","(",")","<",">",".",":","@",'"','{','}','~',',',';','[',']','&','!','%','^','|','?'}
 
     CARACTERES_CONTROL = [bytes.fromhex(i+hex(j)[-1]).decode('ascii')
               for i in ['0', '1']
@@ -93,27 +92,29 @@ class CLexer(Lexer):
     def spaces(self, t):
         pass
 
-    INT_CONST = r'[0-9]+'
+    @_(r'\b[0-9]+\.[0-9]+\b')
+    def FLOAT_CONST(self, t):
+        return t
+    
+    @_(r'\b[0-9]*\.[0-9]+\b')
+    def FLOAT_CONST(self, t):
+        return t
+    
+    @_(r'\b[0-9]+\.[0-9]*\b')
+    def FLOAT_CONST(self, t):
+        return t
 
-    FLOAT_CONST = r'\b[0-9]+\.[0-9]+\b'
+    INT_CONST = r'\b[0-9]+\b'
 
-    #STRING_CONST = r'\"[a-zA-Z0-9]*\"'
-    @_(r'\"')
-    def STRING_CONST(self, t):
-        self.begin(StringLexer)
-        pass
-
-    CHAR_CONST = r'\b\'[a-zA-Z0-9]\'\b'
-
-    STRING = r'[Ss][Tt][Rr][Ii][Nn][Gg]'
+    CHAR_CONST = r"\'[a-zA-Z0-9]\'"
 
     @_(r'\n+')
     def newline(self, t):
         self.lineno += t.value.count('\n')
 
-    @_(r';')
-    def EOI(self, t):
-        self.lineno += t.value.count(';') 
+    # @_(r';')
+    # def EOI(self, t):
+    #     self.lineno += t.value.count(';') 
 
     @_(r'\/\/.*')
     def line_comment(self, t):
@@ -125,6 +126,8 @@ class CLexer(Lexer):
     def multiline_comment(self, t):
         self.begin(MultilineCommentRemover)
         pass
+
+
     #keywords c99
 
     #keywords GNU
@@ -137,65 +140,7 @@ class CLexer(Lexer):
 
     # CHAR_CONST = r'\b\'[a-zA-Z0-9]\'\b'
 
-class StringLexer(Lexer):
-    tokens ={STRING_CONST, RETORNO, ESCAPADO, X}
 
-    _recursion = ""
-
-    #escapoados
-    @_(r'\\\n')
-    def ESCNL(self,t):
-        self._recursion = "\\n"
-        pass
-
-    @_(r'\\\"')
-    def ESCQ(self,t):
-        self._recursion = "\\\""
-        pass
-
-    @_(r'\t')
-    def TAB(self,t):
-        self._recursion = "\t"
-        pass
-    
-    #TODO revisar en el manual
-    @_(r'\\[^btnrf\\]')
-    def ESCAPADO(self,t):
-        self._recursion = t.value[1:]
-        pass
-
-    @_(r'\\[btnrf\\]')
-    def ESCAPADO2(self,t):
-        self._recursion = t.value
-        pass
-
-    @_(r'\"')
-    def RETORNO(self,t):
-        t.type = "STRING_CONST"
-        t.value = str(self._recursion)
-        self._recursion = ""
-        self.begin(CLexer)
-        t.value = "\""+t.value+"\""
-        return t
-    
-    @_(r'(.\Z)|(.\x00)') #error de string
-    def ERROR(self,t):
-        t.value = "error en fichero"
-        self.begin(CLexer)
-        return t
-    
-    @_(r'\n') #error \ en salto de linea
-    def ERROR2(self,t):
-        t.type = "ERROR"
-        t.value = '"Unterminated string constant"'
-        self._recursion = ""
-        self.begin(CLexer)
-        return t
-    
-    @_(r'.')
-    def X(self,t):
-        self._recursion += t.value
-        pass
 
 class MultilineCommentRemover(Lexer):
 
@@ -251,47 +196,47 @@ class MultilineCommentRemover(Lexer):
         pass
 
 if __name__ == '__main__':
-    text = '''
+    text ='''
     //#include <stdio.h>
-//definición de primeras variables
+    //definición de primeras variables
 
 
-int prev1 = 1;
-int prev2 = 0;
+    int prev1 = 1;
+    int prev2 = 0;
 
-/*
-función de fibonacci
-f(n)=f(n-1)+f(n-2)
-*/
-void fib(int n) {
-    if (n < 3) {
-        return;
+    /*
+    función de fibonacci
+    f(n)=f(n-1)+f(n-2)
+    */
+    void fib(int n) {
+        if (n < 3) {
+            return;
+        }
+        int fn = prev1 + prev2;
+        prev2 = prev1;
+        prev1 = fn;
+        printf("%d ", fn);
+        return fib(n - 1);
     }
-    int fn = prev1 + prev2;
-    prev2 = prev1;
-    prev1 = fn;
-    printf("%d ", fn);
-    return fib(n - 1);
-}
 
-void printFib(int n) {
-    if (n < 1) {
-        printf("Invalid number of terms\n");
-    } else if (n == 1) {
-        printf("%d ", 0);
-    } else if (n == 2) {
-        printf("%d %d", 0, 1);
-    } else {
-        printf("%d %d ", 0, 1);
-        fib(n);
+    void printFib(int n) {
+        if (n < 1) {
+            printf("Invalid number of terms\n");
+        } else if (n == 1) {
+            printf("%d ", 0);
+        } else if (n == 2) {
+            printf("%d %d", 0, 1);
+        } else {
+            printf("%d %d ", 0, 1);
+            fib(n);
+        }
     }
-}
 
-int main() {
-    int n = 9; // Change this value to print a different number of terms
-    printFib(n);
-    return 0;
-}
+    int main() {
+        int n = 9; // Change this value to print a different number of terms
+        printFib(n);
+        return 0;
+    }
     '''
     lexer = CLexer()
     for tok in lexer.tokenize(text):
