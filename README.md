@@ -12,3 +12,11 @@ Información obtenida del [manual de C](https://www.gnu.org/software/gnu-c-manua
 ## Parser
 
 ## Traducción a Python
+
+
+# Clases nuevas
+
+- GtIgual
+- Or
+- And
+- Flotante

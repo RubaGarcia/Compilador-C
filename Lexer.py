@@ -11,7 +11,8 @@ class CLexer(Lexer):
         DOUBLE, ELSE, ENUM, EXTERN, FLOAT, FOR, GOTO, IF, INT,                                      # type: ignore
         LONG, REGISTER, RETURN, SHORT, SIGNED, SIZEOF, STATIC,                                      # type: ignore
         STRUCT, SWITCH, TYPEDEF, UNION, UNSIGNED, VOID, VOLATILE, WHILE                             # type: ignore
-        , FLOAT_CONST,  INT_CONST, CHAR_CONST, OBJECTID                                             # type: ignore
+        , FLOAT_CONST,  INT_CONST, CHAR_CONST, OBJECTID, PRINT, STRING                                          # type: ignore 
+        # , INCLUDE, LIBRARY                          
         }
         
     literals = {"=","+","-","*","/","(",")","<",">",".",":","@",'"','{','}','~',',',';','[',']','&','!','%','^','|','?'}
@@ -88,6 +89,13 @@ class CLexer(Lexer):
 
     OBJECTID = r'[a-zA-Z_][a-zA-Z0-9_]*'
     
+    PRINT = r'\b[pP][rR][iI][nN][tT]\b'
+
+    
+    # INCLUDE = r'\#include'
+
+    # LIBRARY = r'\b\<.+\.h\>\b'
+
     @_(r'\t| |\v|\r|\f')
     def spaces(self, t):
         pass
@@ -127,6 +135,9 @@ class CLexer(Lexer):
         self.begin(MultilineCommentRemover)
         pass
 
+    @_(r'\"(.*?)\"')
+    def STRING(self, t):
+        return t
 
     #keywords c99
 

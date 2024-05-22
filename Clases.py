@@ -41,6 +41,21 @@ class Expresion(Nodo):
     cast: str = '_no_type'
     
     
+@dataclass
+class Print(Expresion):
+    texto: str = '_no_set'
+    argumentos = List[Expresion] = field(default_factory=list)
+
+    def genera_codigo(self, n=0):
+        codigo = ""
+        codigo += f'{(n)*" "}print("{self.texto}"'
+        if len(self.argumentos) > 0:
+            codigo += f'( {self.argumentos[0].genera_codigo(0)}'
+
+            for arg in self.argumentos[1:]:
+                codigo += f', {arg.genera_codigo(0)}'
+            codigo += ')'
+        codigo += ')\n'
 
 @dataclass
 class Asignacion(Expresion):
@@ -563,8 +578,67 @@ class Igual(OperacionBinaria):
 
         return codigo
 
+@dataclass
+class GtIgual(OperacionBinaria):
+    operando: str = '>='
 
+    def str(self, n):
+        resultado = super().str(n)
+        resultado += f'{(n)*" "}_geq\n'
+        resultado += self.izquierda.str(n+2)
+        resultado += self.derecha.str(n+2)
+        resultado += f'{(n)*" "}: {self.cast}\n'
+        return resultado
+    
+    def genera_codigo(self, n=0, dict_recibido=dict_global):    
+        codigo = ""
 
+        # codigo += self.izquierda.genera_codigo(n, dict_recibido)
+        # codigo += f'\n'
+        # codigo += f'{(n)*" "}temp0 = temp\n'
+        # codigo += self.derecha.genera_codigo(n, dict_recibido)
+        # codigo += f'\n{(n)*" "}temp = temp0 >= temp'
+
+        codigo = f'{self.izquierda.genera_codigo(n, dict_recibido)} >= {self.derecha.genera_codigo(0, dict_recibido)}'
+        return codigo
+
+@dataclass
+class Or(OperacionBinaria):
+    operando: str = 'or'
+
+    def str(self, n):
+        resultado = super().str(n)
+        resultado += f'{(n)*" "}_or\n'
+        resultado += self.izquierda.str(n+2)
+        resultado += self.derecha.str(n+2)
+        resultado += f'{(n)*" "}: {self.cast}\n'
+        return resultado
+    
+    def genera_codigo(self, n=0, dict_recibido=dict_global):    
+        codigo = ""
+
+        codigo += f'{self.izquierda.genera_codigo(n, dict_recibido)} or {self.derecha.genera_codigo(0, dict_recibido)}'
+        
+        return codigo
+    
+@dataclass
+class And(OperacionBinaria):
+    operando: str = 'and'
+
+    def str(self, n):
+        resultado = super().str(n)
+        resultado += f'{(n)*" "}_and\n'
+        resultado += self.izquierda.str(n+2)
+        resultado += self.derecha.str(n+2)
+        resultado += f'{(n)*" "}: {self.cast}\n'
+        return resultado
+    
+    def genera_codigo(self, n=0, dict_recibido=dict_global):    
+        codigo = ""
+
+        codigo += f'{self.izquierda.genera_codigo(n, dict_recibido)} and {self.derecha.genera_codigo(0, dict_recibido)}'
+        
+        return codigo
 
 @dataclass
 class Neg(Expresion):
@@ -683,6 +757,23 @@ class Entero(Expresion):
         codigo = ""
         codigo = f'{(n)*" "}temp = Int({self.valor})'
         # codigo += "temp = "
+        return codigo
+
+
+@dataclass
+class Flotante(Expresion):
+    valor: float = 0.0
+
+    def str(self, n):
+        resultado = super().str(n)
+        resultado += f'{(n)*" "}_float\n'
+        resultado += f'{(n+2)*" "}{self.valor}\n'
+        resultado += f'{(n)*" "}: {self.cast}\n'
+        return resultado
+    
+    def genera_codigo(self, n=0, dict_recibido=dict_global):
+        codigo = ""
+        codigo = f'{(n)*" "}temp = Float({self.valor})'
         return codigo
 
 @dataclass
