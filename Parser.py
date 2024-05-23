@@ -24,16 +24,30 @@ class CParser(Parser):
     #     ('left', '.')
     # )
 
+    @_("listlineas")
+    def Programa(self, p):
+        return Programa(cuerpo=p[0])
+
+    @_("Programa listlineas")
+    def Programa(self, p):
+        return Programa(secuencia=p[0].secuencia + [p[1]])
+
+    # @_("Clase")
+    # def Programa(self, p):
+    #     return Programa(secuencia=[p[0]])
+
     @_("")
     def optAssign(self, p):
         return None
+
+    
 
     @_("'=' Expression")
     def optAssign(self, p):
         return p[1]
     
     #PRINTS
-    @_("PRINT '('STRING ')' ';' ")
+    @_("PRINT '(' STRING ')' ';' ")
     def Expression(self, p):
         return Print(cuerpo=p[1])
     
@@ -49,13 +63,13 @@ class CParser(Parser):
     def argumentos(self, p):
         return [p[1]] + p[2]
     #RETURN
-    @_("RETURN Expression ';' ")
+    @_("RETURN Expression ")
     def Expression(self, p):
         return Return(cuerpo=p[1])
 
-    @_("RETURN ';' ")
+    @_("RETURN ")
     def Expression(self, p):
-        return Return(cuerpo=None)
+        return Return(cuerpo="None")
 
     #tipos
     @_("INT")
@@ -128,7 +142,7 @@ class CParser(Parser):
     
     @_("tipo OBJECTID optAssign ';' ")
     def Atributo(self, p):
-        return Atributo(tipo=p[0], nombre=p[1], valor=p[2])
+        return Atributo(tipo=p[0], nombre=p[1], cuerpo=p[2])
 
     #Metodo y formal
 
@@ -146,7 +160,7 @@ class CParser(Parser):
     
     @_("tipo OBJECTID")
     def Formal(self, p):
-        return Formal(tipo=p[0], nombre=p[1])
+        return Formal(tipo=p[0], nombre_variable=p[1])
 
     @_("Expression ';'")
     def bloque(self, p):
@@ -165,7 +179,7 @@ class CParser(Parser):
     def Expression(self, p):
         return Menor(izquierda=p[0], derecha=p[2])
     
-    @_("Expression '<''=' Expression")
+    @_("Expression '<' '=' Expression")
     def Expression(self, p):
         return LeIgual(izquierda=p[0], derecha=p[2])
     
@@ -195,12 +209,12 @@ class CParser(Parser):
     
     #if
 
-    @_("IF '(' Expression ')' '{' bloque'}'")
+    @_("IF '(' Expression ')' '{' bloque '}'")
     def Expression(self, p):
         return Condicional(condicion=p[2], verdadero=p[5], falso="continue")
 
     @_("IF '(' Expression ')' '{' bloque '}' Continuacion")
-    def Condicional(self, p):
+    def Expression(self, p):
         return Condicional(condicion=p[2], verdadero=p[5], falso=p[7])
     
     @_("ELSE '{' bloque '}'")
@@ -219,6 +233,28 @@ class CParser(Parser):
     @_("WHILE '(' Expression ')' '{' bloque '}'")
     def Expression(self, p):
         return Bucle(condicion=p[2], bloque=p[5])
+
+    #
+    @_("Atributo")
+    def Linea(self, p):
+        return p[0]
+    
+    @_("Metodo")
+    def Linea(self, p):
+        return p[0]
+    
+    @_("Expression")
+    def Linea(self, p):
+        return p[0]
+    
+    @_("Linea")
+    def listlineas(self, p):
+        return [p[0]]
+    
+    @_("Linea listlineas")
+    def listlineas(self, p):
+        return [p[0]] + p[1]
+
 
 
     # @_("'{' bloque'}'")

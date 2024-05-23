@@ -51,6 +51,7 @@ class CLexer(Lexer):
 
     FOR = r'\b[fF][oO][rR]\b'
 
+    PRINT = r'\b[pP][rR][iI][nN][tT][fF]\b'
     GOTO = r'\b[gG][oO][tT][oO]\b'
 
     IF = r'\b[iI][fF]\b'
@@ -89,7 +90,6 @@ class CLexer(Lexer):
 
     OBJECTID = r'[a-zA-Z_][a-zA-Z0-9_]*'
     
-    PRINT = r'\b[pP][rR][iI][nN][tT]\b'
 
     
     # INCLUDE = r'\#include'
@@ -207,7 +207,17 @@ class MultilineCommentRemover(Lexer):
         pass
 
 if __name__ == '__main__':
-    text ='''
+    text = '''
+    int constantes(){
+        int i = 0;
+        if (i == 1){
+            printf("Hola")
+        }else{
+            printf("Adios")
+        }
+    }
+'''
+    '''
     //#include <stdio.h>
     //definición de primeras variables
 

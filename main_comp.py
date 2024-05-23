@@ -20,7 +20,7 @@ TESTS = [fich for fich in FICHEROS
          if os.path.isfile(os.path.join(DIR, fich)) and
          re.search(r"^[a-zA-Z].*\.(cool|test|cl)$", fich)]
 TESTS.sort()
-# TESTS = ["fact.cl"]
+TESTS = ["simpletest.cl"]
 # print(TESTS)
 
 
@@ -85,8 +85,8 @@ if True:
                         g.close()
                         contador -= 1
             except Exception as e:
-                # import traceback
-                # traceback.print_exception(e)
+                import traceback
+                traceback.print_exception(e)
                 print(f"Lanza excepción en {fich} con el texto {e}")
                 contador -= 1
         elif PRACTICA == '04':
@@ -95,8 +95,8 @@ if True:
             #     print("Revisa el fichero {fich}")
             #     pass
             
-            from Parser import CoolParser
-            parser = CoolParser()
+            from Parser import CParser
+            parser = CParser()
             parser.nombre_fichero = fich
             parser.errores = []
             bien = g.read()

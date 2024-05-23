@@ -1,0 +1,3419 @@
+Grammar:
+
+Rule 0     S' -> Programa
+Rule 1     Programa -> Programa listlineas
+Rule 2     Programa -> listlineas
+Rule 3     optAssign -> = Expression
+Rule 4     optAssign -> <empty>
+Rule 5     Expression -> WHILE ( Expression ) { bloque }
+Rule 6     Expression -> IF ( Expression ) { bloque } Continuacion
+Rule 7     Expression -> IF ( Expression ) { bloque }
+Rule 8     Expression -> Expression | | Expression
+Rule 9     Expression -> Expression & & Expression
+Rule 10    Expression -> ! Expression
+Rule 11    Expression -> Expression ! = Expression
+Rule 12    Expression -> Expression = = Expression
+Rule 13    Expression -> Expression > = Expression
+Rule 14    Expression -> Expression < = Expression
+Rule 15    Expression -> Expression < Expression
+Rule 16    Expression -> ( Expression )
+Rule 17    Expression -> OBJECTID
+Rule 18    Expression -> CHAR_CONST
+Rule 19    Expression -> FLOAT_CONST
+Rule 20    Expression -> INT_CONST
+Rule 21    Expression -> Expression / Expression
+Rule 22    Expression -> Expression * Expression
+Rule 23    Expression -> Expression - Expression
+Rule 24    Expression -> Expression + Expression
+Rule 25    Expression -> RETURN
+Rule 26    Expression -> RETURN Expression
+Rule 27    Expression -> PRINT ( STRING argumentos ) ;
+Rule 28    Expression -> PRINT ( STRING ) ;
+Rule 29    argumentos -> , Expression argumentos
+Rule 30    argumentos -> , Expression
+Rule 31    tipo -> VOID
+Rule 32    tipo -> CHAR
+Rule 33    tipo -> FLOAT
+Rule 34    tipo -> INT
+Rule 35    Atributo -> tipo OBJECTID optAssign ;
+Rule 36    Metodo -> tipo OBJECTID ( listaFormales ) { bloque } ;
+Rule 37    Metodo -> tipo OBJECTID ( ) { bloque } ;
+Rule 38    listaFormales -> Formal
+Rule 39    Formal -> tipo OBJECTID
+Rule 40    bloque -> Expression ; bloque
+Rule 41    bloque -> Expression ;
+Rule 42    Continuacion -> ELSE IF ( Expression ) { bloque }
+Rule 43    Continuacion -> ELSE IF ( Expression ) { bloque } Continuacion
+Rule 44    Continuacion -> ELSE { bloque }
+Rule 45    Linea -> Expression
+Rule 46    Linea -> Metodo
+Rule 47    Linea -> Atributo
+Rule 48    listlineas -> Linea listlineas
+Rule 49    listlineas -> Linea
+
+Unused terminals:
+
+    AUTO
+    SWITCH
+    STATIC
+    BREAK
+    CASE
+    CONST
+    TYPEDEF
+    GOTO
+    ENUM
+    VOLATILE
+    FOR
+    EXTERN
+    UNSIGNED
+    CONTINUE
+    SHORT
+    UNION
+    DO
+    SIZEOF
+    DEFAULT
+    STRUCT
+    SIGNED
+    DOUBLE
+    LONG
+    REGISTER
+
+Terminals, with rules where they appear:
+
+!                    : 10 11
+&                    : 9 9
+(                    : 5 6 7 16 27 28 36 37 42 43
+)                    : 5 6 7 16 27 28 36 37 42 43
+*                    : 22
++                    : 24
+,                    : 29 30
+-                    : 23
+/                    : 21
+;                    : 27 28 35 36 37 40 41
+<                    : 14 15
+=                    : 3 11 12 12 13 14
+>                    : 13
+AUTO                 : 
+BREAK                : 
+CASE                 : 
+CHAR                 : 32
+CHAR_CONST           : 18
+CONST                : 
+CONTINUE             : 
+DEFAULT              : 
+DO                   : 
+DOUBLE               : 
+ELSE                 : 42 43 44
+ENUM                 : 
+EXTERN               : 
+FLOAT                : 33
+FLOAT_CONST          : 19
+FOR                  : 
+GOTO                 : 
+IF                   : 6 7 42 43
+INT                  : 34
+INT_CONST            : 20
+LONG                 : 
+OBJECTID             : 17 35 36 37 39
+PRINT                : 27 28
+REGISTER             : 
+RETURN               : 25 26
+SHORT                : 
+SIGNED               : 
+SIZEOF               : 
+STATIC               : 
+STRING               : 27 28
+STRUCT               : 
+SWITCH               : 
+TYPEDEF              : 
+UNION                : 
+UNSIGNED             : 
+VOID                 : 31
+VOLATILE             : 
+WHILE                : 5
+error                : 
+{                    : 5 6 7 36 37 42 43 44
+|                    : 8 8
+}                    : 5 6 7 36 37 42 43 44
+
+Nonterminals, with rules where they appear:
+
+Atributo             : 47
+Continuacion         : 6 43
+Expression           : 3 5 6 7 8 8 9 9 10 11 11 12 12 13 13 14 14 15 15 16 21 21 22 22 23 23 24 24 26 29 30 40 41 42 43 45
+Formal               : 38
+Linea                : 48 49
+Metodo               : 46
+Programa             : 1 0
+argumentos           : 27 29
+bloque               : 5 6 7 36 37 40 42 43 44
+listaFormales        : 36
+listlineas           : 1 2 48
+optAssign            : 35
+tipo                 : 35 36 37 39
+
+
+state 0
+
+    (0) S' -> . Programa
+    (1) Programa -> . Programa listlineas
+    (2) Programa -> . listlineas
+    (48) listlineas -> . Linea listlineas
+    (49) listlineas -> . Linea
+    (45) Linea -> . Expression
+    (46) Linea -> . Metodo
+    (47) Linea -> . Atributo
+    (5) Expression -> . WHILE ( Expression ) { bloque }
+    (6) Expression -> . IF ( Expression ) { bloque } Continuacion
+    (7) Expression -> . IF ( Expression ) { bloque }
+    (8) Expression -> . Expression | | Expression
+    (9) Expression -> . Expression & & Expression
+    (10) Expression -> . ! Expression
+    (11) Expression -> . Expression ! = Expression
+    (12) Expression -> . Expression = = Expression
+    (13) Expression -> . Expression > = Expression
+    (14) Expression -> . Expression < = Expression
+    (15) Expression -> . Expression < Expression
+    (16) Expression -> . ( Expression )
+    (17) Expression -> . OBJECTID
+    (18) Expression -> . CHAR_CONST
+    (19) Expression -> . FLOAT_CONST
+    (20) Expression -> . INT_CONST
+    (21) Expression -> . Expression / Expression
+    (22) Expression -> . Expression * Expression
+    (23) Expression -> . Expression - Expression
+    (24) Expression -> . Expression + Expression
+    (25) Expression -> . RETURN
+    (26) Expression -> . RETURN Expression
+    (27) Expression -> . PRINT ( STRING argumentos ) ;
+    (28) Expression -> . PRINT ( STRING ) ;
+    (36) Metodo -> . tipo OBJECTID ( listaFormales ) { bloque } ;
+    (37) Metodo -> . tipo OBJECTID ( ) { bloque } ;
+    (35) Atributo -> . tipo OBJECTID optAssign ;
+    (31) tipo -> . VOID
+    (32) tipo -> . CHAR
+    (33) tipo -> . FLOAT
+    (34) tipo -> . INT
+    WHILE           shift and go to state 7
+    IF              shift and go to state 9
+    !               shift and go to state 10
+    (               shift and go to state 8
+    OBJECTID        shift and go to state 11
+    CHAR_CONST      shift and go to state 12
+    FLOAT_CONST     shift and go to state 13
+    INT_CONST       shift and go to state 14
+    RETURN          shift and go to state 15
+    PRINT           shift and go to state 16
+    VOID            shift and go to state 18
+    CHAR            shift and go to state 19
+    FLOAT           shift and go to state 20
+    INT             shift and go to state 21
+
+    Programa                       shift and go to state 1
+    listlineas                     shift and go to state 2
+    Linea                          shift and go to state 3
+    Expression                     shift and go to state 4
+    Metodo                         shift and go to state 5
+    Atributo                       shift and go to state 6
+    tipo                           shift and go to state 17
+
+state 1
+
+    (0) S' -> Programa .
+    (1) Programa -> Programa . listlineas
+    (48) listlineas -> . Linea listlineas
+    (49) listlineas -> . Linea
+    (45) Linea -> . Expression
+    (46) Linea -> . Metodo
+    (47) Linea -> . Atributo
+    (5) Expression -> . WHILE ( Expression ) { bloque }
+    (6) Expression -> . IF ( Expression ) { bloque } Continuacion
+    (7) Expression -> . IF ( Expression ) { bloque }
+    (8) Expression -> . Expression | | Expression
+    (9) Expression -> . Expression & & Expression
+    (10) Expression -> . ! Expression
+    (11) Expression -> . Expression ! = Expression
+    (12) Expression -> . Expression = = Expression
+    (13) Expression -> . Expression > = Expression
+    (14) Expression -> . Expression < = Expression
+    (15) Expression -> . Expression < Expression
+    (16) Expression -> . ( Expression )
+    (17) Expression -> . OBJECTID
+    (18) Expression -> . CHAR_CONST
+    (19) Expression -> . FLOAT_CONST
+    (20) Expression -> . INT_CONST
+    (21) Expression -> . Expression / Expression
+    (22) Expression -> . Expression * Expression
+    (23) Expression -> . Expression - Expression
+    (24) Expression -> . Expression + Expression
+    (25) Expression -> . RETURN
+    (26) Expression -> . RETURN Expression
+    (27) Expression -> . PRINT ( STRING argumentos ) ;
+    (28) Expression -> . PRINT ( STRING ) ;
+    (36) Metodo -> . tipo OBJECTID ( listaFormales ) { bloque } ;
+    (37) Metodo -> . tipo OBJECTID ( ) { bloque } ;
+    (35) Atributo -> . tipo OBJECTID optAssign ;
+    (31) tipo -> . VOID
+    (32) tipo -> . CHAR
+    (33) tipo -> . FLOAT
+    (34) tipo -> . INT
+    WHILE           shift and go to state 7
+    IF              shift and go to state 9
+    !               shift and go to state 10
+    (               shift and go to state 8
+    OBJECTID        shift and go to state 11
+    CHAR_CONST      shift and go to state 12
+    FLOAT_CONST     shift and go to state 13
+    INT_CONST       shift and go to state 14
+    RETURN          shift and go to state 15
+    PRINT           shift and go to state 16
+    VOID            shift and go to state 18
+    CHAR            shift and go to state 19
+    FLOAT           shift and go to state 20
+    INT             shift and go to state 21
+
+    listlineas                     shift and go to state 22
+    Linea                          shift and go to state 3
+    Expression                     shift and go to state 4
+    Metodo                         shift and go to state 5
+    Atributo                       shift and go to state 6
+    tipo                           shift and go to state 17
+
+state 2
+
+    (2) Programa -> listlineas .
+    WHILE           reduce using rule 2 (Programa -> listlineas .)
+    IF              reduce using rule 2 (Programa -> listlineas .)
+    !               reduce using rule 2 (Programa -> listlineas .)
+    (               reduce using rule 2 (Programa -> listlineas .)
+    OBJECTID        reduce using rule 2 (Programa -> listlineas .)
+    CHAR_CONST      reduce using rule 2 (Programa -> listlineas .)
+    FLOAT_CONST     reduce using rule 2 (Programa -> listlineas .)
+    INT_CONST       reduce using rule 2 (Programa -> listlineas .)
+    RETURN          reduce using rule 2 (Programa -> listlineas .)
+    PRINT           reduce using rule 2 (Programa -> listlineas .)
+    VOID            reduce using rule 2 (Programa -> listlineas .)
+    CHAR            reduce using rule 2 (Programa -> listlineas .)
+    FLOAT           reduce using rule 2 (Programa -> listlineas .)
+    INT             reduce using rule 2 (Programa -> listlineas .)
+    $end            reduce using rule 2 (Programa -> listlineas .)
+
+
+state 3
+
+    (48) listlineas -> Linea . listlineas
+    (49) listlineas -> Linea .
+    (48) listlineas -> . Linea listlineas
+    (49) listlineas -> . Linea
+    (45) Linea -> . Expression
+    (46) Linea -> . Metodo
+    (47) Linea -> . Atributo
+    (5) Expression -> . WHILE ( Expression ) { bloque }
+    (6) Expression -> . IF ( Expression ) { bloque } Continuacion
+    (7) Expression -> . IF ( Expression ) { bloque }
+    (8) Expression -> . Expression | | Expression
+    (9) Expression -> . Expression & & Expression
+    (10) Expression -> . ! Expression
+    (11) Expression -> . Expression ! = Expression
+    (12) Expression -> . Expression = = Expression
+    (13) Expression -> . Expression > = Expression
+    (14) Expression -> . Expression < = Expression
+    (15) Expression -> . Expression < Expression
+    (16) Expression -> . ( Expression )
+    (17) Expression -> . OBJECTID
+    (18) Expression -> . CHAR_CONST
+    (19) Expression -> . FLOAT_CONST
+    (20) Expression -> . INT_CONST
+    (21) Expression -> . Expression / Expression
+    (22) Expression -> . Expression * Expression
+    (23) Expression -> . Expression - Expression
+    (24) Expression -> . Expression + Expression
+    (25) Expression -> . RETURN
+    (26) Expression -> . RETURN Expression
+    (27) Expression -> . PRINT ( STRING argumentos ) ;
+    (28) Expression -> . PRINT ( STRING ) ;
+    (36) Metodo -> . tipo OBJECTID ( listaFormales ) { bloque } ;
+    (37) Metodo -> . tipo OBJECTID ( ) { bloque } ;
+    (35) Atributo -> . tipo OBJECTID optAssign ;
+    (31) tipo -> . VOID
+    (32) tipo -> . CHAR
+    (33) tipo -> . FLOAT
+    (34) tipo -> . INT
+  ! shift/reduce conflict for WHILE resolved as shift
+  ! shift/reduce conflict for IF resolved as shift
+  ! shift/reduce conflict for ! resolved as shift
+  ! shift/reduce conflict for ( resolved as shift
+  ! shift/reduce conflict for OBJECTID resolved as shift
+  ! shift/reduce conflict for CHAR_CONST resolved as shift
+  ! shift/reduce conflict for FLOAT_CONST resolved as shift
+  ! shift/reduce conflict for INT_CONST resolved as shift
+  ! shift/reduce conflict for RETURN resolved as shift
+  ! shift/reduce conflict for PRINT resolved as shift
+  ! shift/reduce conflict for VOID resolved as shift
+  ! shift/reduce conflict for CHAR resolved as shift
+  ! shift/reduce conflict for FLOAT resolved as shift
+  ! shift/reduce conflict for INT resolved as shift
+    $end            reduce using rule 49 (listlineas -> Linea .)
+    WHILE           shift and go to state 7
+    IF              shift and go to state 9
+    !               shift and go to state 10
+    (               shift and go to state 8
+    OBJECTID        shift and go to state 11
+    CHAR_CONST      shift and go to state 12
+    FLOAT_CONST     shift and go to state 13
+    INT_CONST       shift and go to state 14
+    RETURN          shift and go to state 15
+    PRINT           shift and go to state 16
+    VOID            shift and go to state 18
+    CHAR            shift and go to state 19
+    FLOAT           shift and go to state 20
+    INT             shift and go to state 21
+
+    Linea                          shift and go to state 3
+    listlineas                     shift and go to state 23
+    Expression                     shift and go to state 4
+    Metodo                         shift and go to state 5
+    Atributo                       shift and go to state 6
+    tipo                           shift and go to state 17
+
+state 4
+
+    (45) Linea -> Expression .
+    (8) Expression -> Expression . | | Expression
+    (9) Expression -> Expression . & & Expression
+    (11) Expression -> Expression . ! = Expression
+    (12) Expression -> Expression . = = Expression
+    (13) Expression -> Expression . > = Expression
+    (14) Expression -> Expression . < = Expression
+    (15) Expression -> Expression . < Expression
+    (21) Expression -> Expression . / Expression
+    (22) Expression -> Expression . * Expression
+    (23) Expression -> Expression . - Expression
+    (24) Expression -> Expression . + Expression
+  ! shift/reduce conflict for ! resolved as shift
+    WHILE           reduce using rule 45 (Linea -> Expression .)
+    IF              reduce using rule 45 (Linea -> Expression .)
+    (               reduce using rule 45 (Linea -> Expression .)
+    OBJECTID        reduce using rule 45 (Linea -> Expression .)
+    CHAR_CONST      reduce using rule 45 (Linea -> Expression .)
+    FLOAT_CONST     reduce using rule 45 (Linea -> Expression .)
+    INT_CONST       reduce using rule 45 (Linea -> Expression .)
+    RETURN          reduce using rule 45 (Linea -> Expression .)
+    PRINT           reduce using rule 45 (Linea -> Expression .)
+    VOID            reduce using rule 45 (Linea -> Expression .)
+    CHAR            reduce using rule 45 (Linea -> Expression .)
+    FLOAT           reduce using rule 45 (Linea -> Expression .)
+    INT             reduce using rule 45 (Linea -> Expression .)
+    $end            reduce using rule 45 (Linea -> Expression .)
+    |               shift and go to state 24
+    &               shift and go to state 25
+    !               shift and go to state 26
+    =               shift and go to state 27
+    >               shift and go to state 28
+    <               shift and go to state 29
+    /               shift and go to state 30
+    *               shift and go to state 31
+    -               shift and go to state 32
+    +               shift and go to state 33
+
+
+state 5
+
+    (46) Linea -> Metodo .
+    WHILE           reduce using rule 46 (Linea -> Metodo .)
+    IF              reduce using rule 46 (Linea -> Metodo .)
+    !               reduce using rule 46 (Linea -> Metodo .)
+    (               reduce using rule 46 (Linea -> Metodo .)
+    OBJECTID        reduce using rule 46 (Linea -> Metodo .)
+    CHAR_CONST      reduce using rule 46 (Linea -> Metodo .)
+    FLOAT_CONST     reduce using rule 46 (Linea -> Metodo .)
+    INT_CONST       reduce using rule 46 (Linea -> Metodo .)
+    RETURN          reduce using rule 46 (Linea -> Metodo .)
+    PRINT           reduce using rule 46 (Linea -> Metodo .)
+    VOID            reduce using rule 46 (Linea -> Metodo .)
+    CHAR            reduce using rule 46 (Linea -> Metodo .)
+    FLOAT           reduce using rule 46 (Linea -> Metodo .)
+    INT             reduce using rule 46 (Linea -> Metodo .)
+    $end            reduce using rule 46 (Linea -> Metodo .)
+
+
+state 6
+
+    (47) Linea -> Atributo .
+    WHILE           reduce using rule 47 (Linea -> Atributo .)
+    IF              reduce using rule 47 (Linea -> Atributo .)
+    !               reduce using rule 47 (Linea -> Atributo .)
+    (               reduce using rule 47 (Linea -> Atributo .)
+    OBJECTID        reduce using rule 47 (Linea -> Atributo .)
+    CHAR_CONST      reduce using rule 47 (Linea -> Atributo .)
+    FLOAT_CONST     reduce using rule 47 (Linea -> Atributo .)
+    INT_CONST       reduce using rule 47 (Linea -> Atributo .)
+    RETURN          reduce using rule 47 (Linea -> Atributo .)
+    PRINT           reduce using rule 47 (Linea -> Atributo .)
+    VOID            reduce using rule 47 (Linea -> Atributo .)
+    CHAR            reduce using rule 47 (Linea -> Atributo .)
+    FLOAT           reduce using rule 47 (Linea -> Atributo .)
+    INT             reduce using rule 47 (Linea -> Atributo .)
+    $end            reduce using rule 47 (Linea -> Atributo .)
+
+
+state 7
+
+    (5) Expression -> WHILE . ( Expression ) { bloque }
+    (               shift and go to state 34
+
+
+state 8
+
+    (16) Expression -> ( . Expression )
+    (5) Expression -> . WHILE ( Expression ) { bloque }
+    (6) Expression -> . IF ( Expression ) { bloque } Continuacion
+    (7) Expression -> . IF ( Expression ) { bloque }
+    (8) Expression -> . Expression | | Expression
+    (9) Expression -> . Expression & & Expression
+    (10) Expression -> . ! Expression
+    (11) Expression -> . Expression ! = Expression
+    (12) Expression -> . Expression = = Expression
+    (13) Expression -> . Expression > = Expression
+    (14) Expression -> . Expression < = Expression
+    (15) Expression -> . Expression < Expression
+    (16) Expression -> . ( Expression )
+    (17) Expression -> . OBJECTID
+    (18) Expression -> . CHAR_CONST
+    (19) Expression -> . FLOAT_CONST
+    (20) Expression -> . INT_CONST
+    (21) Expression -> . Expression / Expression
+    (22) Expression -> . Expression * Expression
+    (23) Expression -> . Expression - Expression
+    (24) Expression -> . Expression + Expression
+    (25) Expression -> . RETURN
+    (26) Expression -> . RETURN Expression
+    (27) Expression -> . PRINT ( STRING argumentos ) ;
+    (28) Expression -> . PRINT ( STRING ) ;
+    WHILE           shift and go to state 7
+    IF              shift and go to state 9
+    !               shift and go to state 10
+    (               shift and go to state 8
+    OBJECTID        shift and go to state 11
+    CHAR_CONST      shift and go to state 12
+    FLOAT_CONST     shift and go to state 13
+    INT_CONST       shift and go to state 14
+    RETURN          shift and go to state 15
+    PRINT           shift and go to state 16
+
+    Expression                     shift and go to state 35
+
+state 9
+
+    (6) Expression -> IF . ( Expression ) { bloque } Continuacion
+    (7) Expression -> IF . ( Expression ) { bloque }
+    (               shift and go to state 36
+
+
+state 10
+
+    (10) Expression -> ! . Expression
+    (5) Expression -> . WHILE ( Expression ) { bloque }
+    (6) Expression -> . IF ( Expression ) { bloque } Continuacion
+    (7) Expression -> . IF ( Expression ) { bloque }
+    (8) Expression -> . Expression | | Expression
+    (9) Expression -> . Expression & & Expression
+    (10) Expression -> . ! Expression
+    (11) Expression -> . Expression ! = Expression
+    (12) Expression -> . Expression = = Expression
+    (13) Expression -> . Expression > = Expression
+    (14) Expression -> . Expression < = Expression
+    (15) Expression -> . Expression < Expression
+    (16) Expression -> . ( Expression )
+    (17) Expression -> . OBJECTID
+    (18) Expression -> . CHAR_CONST
+    (19) Expression -> . FLOAT_CONST
+    (20) Expression -> . INT_CONST
+    (21) Expression -> . Expression / Expression
+    (22) Expression -> . Expression * Expression
+    (23) Expression -> . Expression - Expression
+    (24) Expression -> . Expression + Expression
+    (25) Expression -> . RETURN
+    (26) Expression -> . RETURN Expression
+    (27) Expression -> . PRINT ( STRING argumentos ) ;
+    (28) Expression -> . PRINT ( STRING ) ;
+    WHILE           shift and go to state 7
+    IF              shift and go to state 9
+    !               shift and go to state 10
+    (               shift and go to state 8
+    OBJECTID        shift and go to state 11
+    CHAR_CONST      shift and go to state 12
+    FLOAT_CONST     shift and go to state 13
+    INT_CONST       shift and go to state 14
+    RETURN          shift and go to state 15
+    PRINT           shift and go to state 16
+
+    Expression                     shift and go to state 37
+
+state 11
+
+    (17) Expression -> OBJECTID .
+    |               reduce using rule 17 (Expression -> OBJECTID .)
+    &               reduce using rule 17 (Expression -> OBJECTID .)
+    !               reduce using rule 17 (Expression -> OBJECTID .)
+    =               reduce using rule 17 (Expression -> OBJECTID .)
+    >               reduce using rule 17 (Expression -> OBJECTID .)
+    <               reduce using rule 17 (Expression -> OBJECTID .)
+    /               reduce using rule 17 (Expression -> OBJECTID .)
+    *               reduce using rule 17 (Expression -> OBJECTID .)
+    -               reduce using rule 17 (Expression -> OBJECTID .)
+    +               reduce using rule 17 (Expression -> OBJECTID .)
+    WHILE           reduce using rule 17 (Expression -> OBJECTID .)
+    IF              reduce using rule 17 (Expression -> OBJECTID .)
+    (               reduce using rule 17 (Expression -> OBJECTID .)
+    OBJECTID        reduce using rule 17 (Expression -> OBJECTID .)
+    CHAR_CONST      reduce using rule 17 (Expression -> OBJECTID .)
+    FLOAT_CONST     reduce using rule 17 (Expression -> OBJECTID .)
+    INT_CONST       reduce using rule 17 (Expression -> OBJECTID .)
+    RETURN          reduce using rule 17 (Expression -> OBJECTID .)
+    PRINT           reduce using rule 17 (Expression -> OBJECTID .)
+    VOID            reduce using rule 17 (Expression -> OBJECTID .)
+    CHAR            reduce using rule 17 (Expression -> OBJECTID .)
+    FLOAT           reduce using rule 17 (Expression -> OBJECTID .)
+    INT             reduce using rule 17 (Expression -> OBJECTID .)
+    $end            reduce using rule 17 (Expression -> OBJECTID .)
+    )               reduce using rule 17 (Expression -> OBJECTID .)
+    ;               reduce using rule 17 (Expression -> OBJECTID .)
+    ,               reduce using rule 17 (Expression -> OBJECTID .)
+
+
+state 12
+
+    (18) Expression -> CHAR_CONST .
+    |               reduce using rule 18 (Expression -> CHAR_CONST .)
+    &               reduce using rule 18 (Expression -> CHAR_CONST .)
+    !               reduce using rule 18 (Expression -> CHAR_CONST .)
+    =               reduce using rule 18 (Expression -> CHAR_CONST .)
+    >               reduce using rule 18 (Expression -> CHAR_CONST .)
+    <               reduce using rule 18 (Expression -> CHAR_CONST .)
+    /               reduce using rule 18 (Expression -> CHAR_CONST .)
+    *               reduce using rule 18 (Expression -> CHAR_CONST .)
+    -               reduce using rule 18 (Expression -> CHAR_CONST .)
+    +               reduce using rule 18 (Expression -> CHAR_CONST .)
+    WHILE           reduce using rule 18 (Expression -> CHAR_CONST .)
+    IF              reduce using rule 18 (Expression -> CHAR_CONST .)
+    (               reduce using rule 18 (Expression -> CHAR_CONST .)
+    OBJECTID        reduce using rule 18 (Expression -> CHAR_CONST .)
+    CHAR_CONST      reduce using rule 18 (Expression -> CHAR_CONST .)
+    FLOAT_CONST     reduce using rule 18 (Expression -> CHAR_CONST .)
+    INT_CONST       reduce using rule 18 (Expression -> CHAR_CONST .)
+    RETURN          reduce using rule 18 (Expression -> CHAR_CONST .)
+    PRINT           reduce using rule 18 (Expression -> CHAR_CONST .)
+    VOID            reduce using rule 18 (Expression -> CHAR_CONST .)
+    CHAR            reduce using rule 18 (Expression -> CHAR_CONST .)
+    FLOAT           reduce using rule 18 (Expression -> CHAR_CONST .)
+    INT             reduce using rule 18 (Expression -> CHAR_CONST .)
+    $end            reduce using rule 18 (Expression -> CHAR_CONST .)
+    )               reduce using rule 18 (Expression -> CHAR_CONST .)
+    ;               reduce using rule 18 (Expression -> CHAR_CONST .)
+    ,               reduce using rule 18 (Expression -> CHAR_CONST .)
+
+
+state 13
+
+    (19) Expression -> FLOAT_CONST .
+    |               reduce using rule 19 (Expression -> FLOAT_CONST .)
+    &               reduce using rule 19 (Expression -> FLOAT_CONST .)
+    !               reduce using rule 19 (Expression -> FLOAT_CONST .)
+    =               reduce using rule 19 (Expression -> FLOAT_CONST .)
+    >               reduce using rule 19 (Expression -> FLOAT_CONST .)
+    <               reduce using rule 19 (Expression -> FLOAT_CONST .)
+    /               reduce using rule 19 (Expression -> FLOAT_CONST .)
+    *               reduce using rule 19 (Expression -> FLOAT_CONST .)
+    -               reduce using rule 19 (Expression -> FLOAT_CONST .)
+    +               reduce using rule 19 (Expression -> FLOAT_CONST .)
+    WHILE           reduce using rule 19 (Expression -> FLOAT_CONST .)
+    IF              reduce using rule 19 (Expression -> FLOAT_CONST .)
+    (               reduce using rule 19 (Expression -> FLOAT_CONST .)
+    OBJECTID        reduce using rule 19 (Expression -> FLOAT_CONST .)
+    CHAR_CONST      reduce using rule 19 (Expression -> FLOAT_CONST .)
+    FLOAT_CONST     reduce using rule 19 (Expression -> FLOAT_CONST .)
+    INT_CONST       reduce using rule 19 (Expression -> FLOAT_CONST .)
+    RETURN          reduce using rule 19 (Expression -> FLOAT_CONST .)
+    PRINT           reduce using rule 19 (Expression -> FLOAT_CONST .)
+    VOID            reduce using rule 19 (Expression -> FLOAT_CONST .)
+    CHAR            reduce using rule 19 (Expression -> FLOAT_CONST .)
+    FLOAT           reduce using rule 19 (Expression -> FLOAT_CONST .)
+    INT             reduce using rule 19 (Expression -> FLOAT_CONST .)
+    $end            reduce using rule 19 (Expression -> FLOAT_CONST .)
+    )               reduce using rule 19 (Expression -> FLOAT_CONST .)
+    ;               reduce using rule 19 (Expression -> FLOAT_CONST .)
+    ,               reduce using rule 19 (Expression -> FLOAT_CONST .)
+
+
+state 14
+
+    (20) Expression -> INT_CONST .
+    |               reduce using rule 20 (Expression -> INT_CONST .)
+    &               reduce using rule 20 (Expression -> INT_CONST .)
+    !               reduce using rule 20 (Expression -> INT_CONST .)
+    =               reduce using rule 20 (Expression -> INT_CONST .)
+    >               reduce using rule 20 (Expression -> INT_CONST .)
+    <               reduce using rule 20 (Expression -> INT_CONST .)
+    /               reduce using rule 20 (Expression -> INT_CONST .)
+    *               reduce using rule 20 (Expression -> INT_CONST .)
+    -               reduce using rule 20 (Expression -> INT_CONST .)
+    +               reduce using rule 20 (Expression -> INT_CONST .)
+    WHILE           reduce using rule 20 (Expression -> INT_CONST .)
+    IF              reduce using rule 20 (Expression -> INT_CONST .)
+    (               reduce using rule 20 (Expression -> INT_CONST .)
+    OBJECTID        reduce using rule 20 (Expression -> INT_CONST .)
+    CHAR_CONST      reduce using rule 20 (Expression -> INT_CONST .)
+    FLOAT_CONST     reduce using rule 20 (Expression -> INT_CONST .)
+    INT_CONST       reduce using rule 20 (Expression -> INT_CONST .)
+    RETURN          reduce using rule 20 (Expression -> INT_CONST .)
+    PRINT           reduce using rule 20 (Expression -> INT_CONST .)
+    VOID            reduce using rule 20 (Expression -> INT_CONST .)
+    CHAR            reduce using rule 20 (Expression -> INT_CONST .)
+    FLOAT           reduce using rule 20 (Expression -> INT_CONST .)
+    INT             reduce using rule 20 (Expression -> INT_CONST .)
+    $end            reduce using rule 20 (Expression -> INT_CONST .)
+    )               reduce using rule 20 (Expression -> INT_CONST .)
+    ;               reduce using rule 20 (Expression -> INT_CONST .)
+    ,               reduce using rule 20 (Expression -> INT_CONST .)
+
+
+state 15
+
+    (25) Expression -> RETURN .
+    (26) Expression -> RETURN . Expression
+    (5) Expression -> . WHILE ( Expression ) { bloque }
+    (6) Expression -> . IF ( Expression ) { bloque } Continuacion
+    (7) Expression -> . IF ( Expression ) { bloque }
+    (8) Expression -> . Expression | | Expression
+    (9) Expression -> . Expression & & Expression
+    (10) Expression -> . ! Expression
+    (11) Expression -> . Expression ! = Expression
+    (12) Expression -> . Expression = = Expression
+    (13) Expression -> . Expression > = Expression
+    (14) Expression -> . Expression < = Expression
+    (15) Expression -> . Expression < Expression
+    (16) Expression -> . ( Expression )
+    (17) Expression -> . OBJECTID
+    (18) Expression -> . CHAR_CONST
+    (19) Expression -> . FLOAT_CONST
+    (20) Expression -> . INT_CONST
+    (21) Expression -> . Expression / Expression
+    (22) Expression -> . Expression * Expression
+    (23) Expression -> . Expression - Expression
+    (24) Expression -> . Expression + Expression
+    (25) Expression -> . RETURN
+    (26) Expression -> . RETURN Expression
+    (27) Expression -> . PRINT ( STRING argumentos ) ;
+    (28) Expression -> . PRINT ( STRING ) ;
+  ! shift/reduce conflict for WHILE resolved as shift
+  ! shift/reduce conflict for IF resolved as shift
+  ! shift/reduce conflict for ! resolved as shift
+  ! shift/reduce conflict for ( resolved as shift
+  ! shift/reduce conflict for OBJECTID resolved as shift
+  ! shift/reduce conflict for CHAR_CONST resolved as shift
+  ! shift/reduce conflict for FLOAT_CONST resolved as shift
+  ! shift/reduce conflict for INT_CONST resolved as shift
+  ! shift/reduce conflict for RETURN resolved as shift
+  ! shift/reduce conflict for PRINT resolved as shift
+    |               reduce using rule 25 (Expression -> RETURN .)
+    &               reduce using rule 25 (Expression -> RETURN .)
+    =               reduce using rule 25 (Expression -> RETURN .)
+    >               reduce using rule 25 (Expression -> RETURN .)
+    <               reduce using rule 25 (Expression -> RETURN .)
+    /               reduce using rule 25 (Expression -> RETURN .)
+    *               reduce using rule 25 (Expression -> RETURN .)
+    -               reduce using rule 25 (Expression -> RETURN .)
+    +               reduce using rule 25 (Expression -> RETURN .)
+    VOID            reduce using rule 25 (Expression -> RETURN .)
+    CHAR            reduce using rule 25 (Expression -> RETURN .)
+    FLOAT           reduce using rule 25 (Expression -> RETURN .)
+    INT             reduce using rule 25 (Expression -> RETURN .)
+    $end            reduce using rule 25 (Expression -> RETURN .)
+    )               reduce using rule 25 (Expression -> RETURN .)
+    ;               reduce using rule 25 (Expression -> RETURN .)
+    ,               reduce using rule 25 (Expression -> RETURN .)
+    WHILE           shift and go to state 7
+    IF              shift and go to state 9
+    !               shift and go to state 10
+    (               shift and go to state 8
+    OBJECTID        shift and go to state 11
+    CHAR_CONST      shift and go to state 12
+    FLOAT_CONST     shift and go to state 13
+    INT_CONST       shift and go to state 14
+    RETURN          shift and go to state 15
+    PRINT           shift and go to state 16
+
+    Expression                     shift and go to state 38
+
+state 16
+
+    (27) Expression -> PRINT . ( STRING argumentos ) ;
+    (28) Expression -> PRINT . ( STRING ) ;
+    (               shift and go to state 39
+
+
+state 17
+
+    (36) Metodo -> tipo . OBJECTID ( listaFormales ) { bloque } ;
+    (37) Metodo -> tipo . OBJECTID ( ) { bloque } ;
+    (35) Atributo -> tipo . OBJECTID optAssign ;
+    OBJECTID        shift and go to state 40
+
+
+state 18
+
+    (31) tipo -> VOID .
+    OBJECTID        reduce using rule 31 (tipo -> VOID .)
+
+
+state 19
+
+    (32) tipo -> CHAR .
+    OBJECTID        reduce using rule 32 (tipo -> CHAR .)
+
+
+state 20
+
+    (33) tipo -> FLOAT .
+    OBJECTID        reduce using rule 33 (tipo -> FLOAT .)
+
+
+state 21
+
+    (34) tipo -> INT .
+    OBJECTID        reduce using rule 34 (tipo -> INT .)
+
+
+state 22
+
+    (1) Programa -> Programa listlineas .
+    WHILE           reduce using rule 1 (Programa -> Programa listlineas .)
+    IF              reduce using rule 1 (Programa -> Programa listlineas .)
+    !               reduce using rule 1 (Programa -> Programa listlineas .)
+    (               reduce using rule 1 (Programa -> Programa listlineas .)
+    OBJECTID        reduce using rule 1 (Programa -> Programa listlineas .)
+    CHAR_CONST      reduce using rule 1 (Programa -> Programa listlineas .)
+    FLOAT_CONST     reduce using rule 1 (Programa -> Programa listlineas .)
+    INT_CONST       reduce using rule 1 (Programa -> Programa listlineas .)
+    RETURN          reduce using rule 1 (Programa -> Programa listlineas .)
+    PRINT           reduce using rule 1 (Programa -> Programa listlineas .)
+    VOID            reduce using rule 1 (Programa -> Programa listlineas .)
+    CHAR            reduce using rule 1 (Programa -> Programa listlineas .)
+    FLOAT           reduce using rule 1 (Programa -> Programa listlineas .)
+    INT             reduce using rule 1 (Programa -> Programa listlineas .)
+    $end            reduce using rule 1 (Programa -> Programa listlineas .)
+
+
+state 23
+
+    (48) listlineas -> Linea listlineas .
+    WHILE           reduce using rule 48 (listlineas -> Linea listlineas .)
+    IF              reduce using rule 48 (listlineas -> Linea listlineas .)
+    !               reduce using rule 48 (listlineas -> Linea listlineas .)
+    (               reduce using rule 48 (listlineas -> Linea listlineas .)
+    OBJECTID        reduce using rule 48 (listlineas -> Linea listlineas .)
+    CHAR_CONST      reduce using rule 48 (listlineas -> Linea listlineas .)
+    FLOAT_CONST     reduce using rule 48 (listlineas -> Linea listlineas .)
+    INT_CONST       reduce using rule 48 (listlineas -> Linea listlineas .)
+    RETURN          reduce using rule 48 (listlineas -> Linea listlineas .)
+    PRINT           reduce using rule 48 (listlineas -> Linea listlineas .)
+    VOID            reduce using rule 48 (listlineas -> Linea listlineas .)
+    CHAR            reduce using rule 48 (listlineas -> Linea listlineas .)
+    FLOAT           reduce using rule 48 (listlineas -> Linea listlineas .)
+    INT             reduce using rule 48 (listlineas -> Linea listlineas .)
+    $end            reduce using rule 48 (listlineas -> Linea listlineas .)
+
+
+state 24
+
+    (8) Expression -> Expression | . | Expression
+    |               shift and go to state 41
+
+
+state 25
+
+    (9) Expression -> Expression & . & Expression
+    &               shift and go to state 42
+
+
+state 26
+
+    (11) Expression -> Expression ! . = Expression
+    =               shift and go to state 43
+
+
+state 27
+
+    (12) Expression -> Expression = . = Expression
+    =               shift and go to state 44
+
+
+state 28
+
+    (13) Expression -> Expression > . = Expression
+    =               shift and go to state 45
+
+
+state 29
+
+    (14) Expression -> Expression < . = Expression
+    (15) Expression -> Expression < . Expression
+    (5) Expression -> . WHILE ( Expression ) { bloque }
+    (6) Expression -> . IF ( Expression ) { bloque } Continuacion
+    (7) Expression -> . IF ( Expression ) { bloque }
+    (8) Expression -> . Expression | | Expression
+    (9) Expression -> . Expression & & Expression
+    (10) Expression -> . ! Expression
+    (11) Expression -> . Expression ! = Expression
+    (12) Expression -> . Expression = = Expression
+    (13) Expression -> . Expression > = Expression
+    (14) Expression -> . Expression < = Expression
+    (15) Expression -> . Expression < Expression
+    (16) Expression -> . ( Expression )
+    (17) Expression -> . OBJECTID
+    (18) Expression -> . CHAR_CONST
+    (19) Expression -> . FLOAT_CONST
+    (20) Expression -> . INT_CONST
+    (21) Expression -> . Expression / Expression
+    (22) Expression -> . Expression * Expression
+    (23) Expression -> . Expression - Expression
+    (24) Expression -> . Expression + Expression
+    (25) Expression -> . RETURN
+    (26) Expression -> . RETURN Expression
+    (27) Expression -> . PRINT ( STRING argumentos ) ;
+    (28) Expression -> . PRINT ( STRING ) ;
+    =               shift and go to state 47
+    WHILE           shift and go to state 7
+    IF              shift and go to state 9
+    !               shift and go to state 10
+    (               shift and go to state 8
+    OBJECTID        shift and go to state 11
+    CHAR_CONST      shift and go to state 12
+    FLOAT_CONST     shift and go to state 13
+    INT_CONST       shift and go to state 14
+    RETURN          shift and go to state 15
+    PRINT           shift and go to state 16
+
+    Expression                     shift and go to state 46
+
+state 30
+
+    (21) Expression -> Expression / . Expression
+    (5) Expression -> . WHILE ( Expression ) { bloque }
+    (6) Expression -> . IF ( Expression ) { bloque } Continuacion
+    (7) Expression -> . IF ( Expression ) { bloque }
+    (8) Expression -> . Expression | | Expression
+    (9) Expression -> . Expression & & Expression
+    (10) Expression -> . ! Expression
+    (11) Expression -> . Expression ! = Expression
+    (12) Expression -> . Expression = = Expression
+    (13) Expression -> . Expression > = Expression
+    (14) Expression -> . Expression < = Expression
+    (15) Expression -> . Expression < Expression
+    (16) Expression -> . ( Expression )
+    (17) Expression -> . OBJECTID
+    (18) Expression -> . CHAR_CONST
+    (19) Expression -> . FLOAT_CONST
+    (20) Expression -> . INT_CONST
+    (21) Expression -> . Expression / Expression
+    (22) Expression -> . Expression * Expression
+    (23) Expression -> . Expression - Expression
+    (24) Expression -> . Expression + Expression
+    (25) Expression -> . RETURN
+    (26) Expression -> . RETURN Expression
+    (27) Expression -> . PRINT ( STRING argumentos ) ;
+    (28) Expression -> . PRINT ( STRING ) ;
+    WHILE           shift and go to state 7
+    IF              shift and go to state 9
+    !               shift and go to state 10
+    (               shift and go to state 8
+    OBJECTID        shift and go to state 11
+    CHAR_CONST      shift and go to state 12
+    FLOAT_CONST     shift and go to state 13
+    INT_CONST       shift and go to state 14
+    RETURN          shift and go to state 15
+    PRINT           shift and go to state 16
+
+    Expression                     shift and go to state 48
+
+state 31
+
+    (22) Expression -> Expression * . Expression
+    (5) Expression -> . WHILE ( Expression ) { bloque }
+    (6) Expression -> . IF ( Expression ) { bloque } Continuacion
+    (7) Expression -> . IF ( Expression ) { bloque }
+    (8) Expression -> . Expression | | Expression
+    (9) Expression -> . Expression & & Expression
+    (10) Expression -> . ! Expression
+    (11) Expression -> . Expression ! = Expression
+    (12) Expression -> . Expression = = Expression
+    (13) Expression -> . Expression > = Expression
+    (14) Expression -> . Expression < = Expression
+    (15) Expression -> . Expression < Expression
+    (16) Expression -> . ( Expression )
+    (17) Expression -> . OBJECTID
+    (18) Expression -> . CHAR_CONST
+    (19) Expression -> . FLOAT_CONST
+    (20) Expression -> . INT_CONST
+    (21) Expression -> . Expression / Expression
+    (22) Expression -> . Expression * Expression
+    (23) Expression -> . Expression - Expression
+    (24) Expression -> . Expression + Expression
+    (25) Expression -> . RETURN
+    (26) Expression -> . RETURN Expression
+    (27) Expression -> . PRINT ( STRING argumentos ) ;
+    (28) Expression -> . PRINT ( STRING ) ;
+    WHILE           shift and go to state 7
+    IF              shift and go to state 9
+    !               shift and go to state 10
+    (               shift and go to state 8
+    OBJECTID        shift and go to state 11
+    CHAR_CONST      shift and go to state 12
+    FLOAT_CONST     shift and go to state 13
+    INT_CONST       shift and go to state 14
+    RETURN          shift and go to state 15
+    PRINT           shift and go to state 16
+
+    Expression                     shift and go to state 49
+
+state 32
+
+    (23) Expression -> Expression - . Expression
+    (5) Expression -> . WHILE ( Expression ) { bloque }
+    (6) Expression -> . IF ( Expression ) { bloque } Continuacion
+    (7) Expression -> . IF ( Expression ) { bloque }
+    (8) Expression -> . Expression | | Expression
+    (9) Expression -> . Expression & & Expression
+    (10) Expression -> . ! Expression
+    (11) Expression -> . Expression ! = Expression
+    (12) Expression -> . Expression = = Expression
+    (13) Expression -> . Expression > = Expression
+    (14) Expression -> . Expression < = Expression
+    (15) Expression -> . Expression < Expression
+    (16) Expression -> . ( Expression )
+    (17) Expression -> . OBJECTID
+    (18) Expression -> . CHAR_CONST
+    (19) Expression -> . FLOAT_CONST
+    (20) Expression -> . INT_CONST
+    (21) Expression -> . Expression / Expression
+    (22) Expression -> . Expression * Expression
+    (23) Expression -> . Expression - Expression
+    (24) Expression -> . Expression + Expression
+    (25) Expression -> . RETURN
+    (26) Expression -> . RETURN Expression
+    (27) Expression -> . PRINT ( STRING argumentos ) ;
+    (28) Expression -> . PRINT ( STRING ) ;
+    WHILE           shift and go to state 7
+    IF              shift and go to state 9
+    !               shift and go to state 10
+    (               shift and go to state 8
+    OBJECTID        shift and go to state 11
+    CHAR_CONST      shift and go to state 12
+    FLOAT_CONST     shift and go to state 13
+    INT_CONST       shift and go to state 14
+    RETURN          shift and go to state 15
+    PRINT           shift and go to state 16
+
+    Expression                     shift and go to state 50
+
+state 33
+
+    (24) Expression -> Expression + . Expression
+    (5) Expression -> . WHILE ( Expression ) { bloque }
+    (6) Expression -> . IF ( Expression ) { bloque } Continuacion
+    (7) Expression -> . IF ( Expression ) { bloque }
+    (8) Expression -> . Expression | | Expression
+    (9) Expression -> . Expression & & Expression
+    (10) Expression -> . ! Expression
+    (11) Expression -> . Expression ! = Expression
+    (12) Expression -> . Expression = = Expression
+    (13) Expression -> . Expression > = Expression
+    (14) Expression -> . Expression < = Expression
+    (15) Expression -> . Expression < Expression
+    (16) Expression -> . ( Expression )
+    (17) Expression -> . OBJECTID
+    (18) Expression -> . CHAR_CONST
+    (19) Expression -> . FLOAT_CONST
+    (20) Expression -> . INT_CONST
+    (21) Expression -> . Expression / Expression
+    (22) Expression -> . Expression * Expression
+    (23) Expression -> . Expression - Expression
+    (24) Expression -> . Expression + Expression
+    (25) Expression -> . RETURN
+    (26) Expression -> . RETURN Expression
+    (27) Expression -> . PRINT ( STRING argumentos ) ;
+    (28) Expression -> . PRINT ( STRING ) ;
+    WHILE           shift and go to state 7
+    IF              shift and go to state 9
+    !               shift and go to state 10
+    (               shift and go to state 8
+    OBJECTID        shift and go to state 11
+    CHAR_CONST      shift and go to state 12
+    FLOAT_CONST     shift and go to state 13
+    INT_CONST       shift and go to state 14
+    RETURN          shift and go to state 15
+    PRINT           shift and go to state 16
+
+    Expression                     shift and go to state 51
+
+state 34
+
+    (5) Expression -> WHILE ( . Expression ) { bloque }
+    (5) Expression -> . WHILE ( Expression ) { bloque }
+    (6) Expression -> . IF ( Expression ) { bloque } Continuacion
+    (7) Expression -> . IF ( Expression ) { bloque }
+    (8) Expression -> . Expression | | Expression
+    (9) Expression -> . Expression & & Expression
+    (10) Expression -> . ! Expression
+    (11) Expression -> . Expression ! = Expression
+    (12) Expression -> . Expression = = Expression
+    (13) Expression -> . Expression > = Expression
+    (14) Expression -> . Expression < = Expression
+    (15) Expression -> . Expression < Expression
+    (16) Expression -> . ( Expression )
+    (17) Expression -> . OBJECTID
+    (18) Expression -> . CHAR_CONST
+    (19) Expression -> . FLOAT_CONST
+    (20) Expression -> . INT_CONST
+    (21) Expression -> . Expression / Expression
+    (22) Expression -> . Expression * Expression
+    (23) Expression -> . Expression - Expression
+    (24) Expression -> . Expression + Expression
+    (25) Expression -> . RETURN
+    (26) Expression -> . RETURN Expression
+    (27) Expression -> . PRINT ( STRING argumentos ) ;
+    (28) Expression -> . PRINT ( STRING ) ;
+    WHILE           shift and go to state 7
+    IF              shift and go to state 9
+    !               shift and go to state 10
+    (               shift and go to state 8
+    OBJECTID        shift and go to state 11
+    CHAR_CONST      shift and go to state 12
+    FLOAT_CONST     shift and go to state 13
+    INT_CONST       shift and go to state 14
+    RETURN          shift and go to state 15
+    PRINT           shift and go to state 16
+
+    Expression                     shift and go to state 52
+
+state 35
+
+    (16) Expression -> ( Expression . )
+    (8) Expression -> Expression . | | Expression
+    (9) Expression -> Expression . & & Expression
+    (11) Expression -> Expression . ! = Expression
+    (12) Expression -> Expression . = = Expression
+    (13) Expression -> Expression . > = Expression
+    (14) Expression -> Expression . < = Expression
+    (15) Expression -> Expression . < Expression
+    (21) Expression -> Expression . / Expression
+    (22) Expression -> Expression . * Expression
+    (23) Expression -> Expression . - Expression
+    (24) Expression -> Expression . + Expression
+    )               shift and go to state 53
+    |               shift and go to state 24
+    &               shift and go to state 25
+    !               shift and go to state 26
+    =               shift and go to state 27
+    >               shift and go to state 28
+    <               shift and go to state 29
+    /               shift and go to state 30
+    *               shift and go to state 31
+    -               shift and go to state 32
+    +               shift and go to state 33
+
+
+state 36
+
+    (6) Expression -> IF ( . Expression ) { bloque } Continuacion
+    (7) Expression -> IF ( . Expression ) { bloque }
+    (5) Expression -> . WHILE ( Expression ) { bloque }
+    (6) Expression -> . IF ( Expression ) { bloque } Continuacion
+    (7) Expression -> . IF ( Expression ) { bloque }
+    (8) Expression -> . Expression | | Expression
+    (9) Expression -> . Expression & & Expression
+    (10) Expression -> . ! Expression
+    (11) Expression -> . Expression ! = Expression
+    (12) Expression -> . Expression = = Expression
+    (13) Expression -> . Expression > = Expression
+    (14) Expression -> . Expression < = Expression
+    (15) Expression -> . Expression < Expression
+    (16) Expression -> . ( Expression )
+    (17) Expression -> . OBJECTID
+    (18) Expression -> . CHAR_CONST
+    (19) Expression -> . FLOAT_CONST
+    (20) Expression -> . INT_CONST
+    (21) Expression -> . Expression / Expression
+    (22) Expression -> . Expression * Expression
+    (23) Expression -> . Expression - Expression
+    (24) Expression -> . Expression + Expression
+    (25) Expression -> . RETURN
+    (26) Expression -> . RETURN Expression
+    (27) Expression -> . PRINT ( STRING argumentos ) ;
+    (28) Expression -> . PRINT ( STRING ) ;
+    WHILE           shift and go to state 7
+    IF              shift and go to state 9
+    !               shift and go to state 10
+    (               shift and go to state 8
+    OBJECTID        shift and go to state 11
+    CHAR_CONST      shift and go to state 12
+    FLOAT_CONST     shift and go to state 13
+    INT_CONST       shift and go to state 14
+    RETURN          shift and go to state 15
+    PRINT           shift and go to state 16
+
+    Expression                     shift and go to state 54
+
+state 37
+
+    (10) Expression -> ! Expression .
+    (8) Expression -> Expression . | | Expression
+    (9) Expression -> Expression . & & Expression
+    (11) Expression -> Expression . ! = Expression
+    (12) Expression -> Expression . = = Expression
+    (13) Expression -> Expression . > = Expression
+    (14) Expression -> Expression . < = Expression
+    (15) Expression -> Expression . < Expression
+    (21) Expression -> Expression . / Expression
+    (22) Expression -> Expression . * Expression
+    (23) Expression -> Expression . - Expression
+    (24) Expression -> Expression . + Expression
+  ! shift/reduce conflict for | resolved as shift
+  ! shift/reduce conflict for & resolved as shift
+  ! shift/reduce conflict for ! resolved as shift
+  ! shift/reduce conflict for = resolved as shift
+  ! shift/reduce conflict for > resolved as shift
+  ! shift/reduce conflict for < resolved as shift
+  ! shift/reduce conflict for / resolved as shift
+  ! shift/reduce conflict for * resolved as shift
+  ! shift/reduce conflict for - resolved as shift
+  ! shift/reduce conflict for + resolved as shift
+    WHILE           reduce using rule 10 (Expression -> ! Expression .)
+    IF              reduce using rule 10 (Expression -> ! Expression .)
+    (               reduce using rule 10 (Expression -> ! Expression .)
+    OBJECTID        reduce using rule 10 (Expression -> ! Expression .)
+    CHAR_CONST      reduce using rule 10 (Expression -> ! Expression .)
+    FLOAT_CONST     reduce using rule 10 (Expression -> ! Expression .)
+    INT_CONST       reduce using rule 10 (Expression -> ! Expression .)
+    RETURN          reduce using rule 10 (Expression -> ! Expression .)
+    PRINT           reduce using rule 10 (Expression -> ! Expression .)
+    VOID            reduce using rule 10 (Expression -> ! Expression .)
+    CHAR            reduce using rule 10 (Expression -> ! Expression .)
+    FLOAT           reduce using rule 10 (Expression -> ! Expression .)
+    INT             reduce using rule 10 (Expression -> ! Expression .)
+    $end            reduce using rule 10 (Expression -> ! Expression .)
+    )               reduce using rule 10 (Expression -> ! Expression .)
+    ;               reduce using rule 10 (Expression -> ! Expression .)
+    ,               reduce using rule 10 (Expression -> ! Expression .)
+    |               shift and go to state 24
+    &               shift and go to state 25
+    !               shift and go to state 26
+    =               shift and go to state 27
+    >               shift and go to state 28
+    <               shift and go to state 29
+    /               shift and go to state 30
+    *               shift and go to state 31
+    -               shift and go to state 32
+    +               shift and go to state 33
+
+
+state 38
+
+    (26) Expression -> RETURN Expression .
+    (8) Expression -> Expression . | | Expression
+    (9) Expression -> Expression . & & Expression
+    (11) Expression -> Expression . ! = Expression
+    (12) Expression -> Expression . = = Expression
+    (13) Expression -> Expression . > = Expression
+    (14) Expression -> Expression . < = Expression
+    (15) Expression -> Expression . < Expression
+    (21) Expression -> Expression . / Expression
+    (22) Expression -> Expression . * Expression
+    (23) Expression -> Expression . - Expression
+    (24) Expression -> Expression . + Expression
+  ! shift/reduce conflict for | resolved as shift
+  ! shift/reduce conflict for & resolved as shift
+  ! shift/reduce conflict for ! resolved as shift
+  ! shift/reduce conflict for = resolved as shift
+  ! shift/reduce conflict for > resolved as shift
+  ! shift/reduce conflict for < resolved as shift
+  ! shift/reduce conflict for / resolved as shift
+  ! shift/reduce conflict for * resolved as shift
+  ! shift/reduce conflict for - resolved as shift
+  ! shift/reduce conflict for + resolved as shift
+    WHILE           reduce using rule 26 (Expression -> RETURN Expression .)
+    IF              reduce using rule 26 (Expression -> RETURN Expression .)
+    (               reduce using rule 26 (Expression -> RETURN Expression .)
+    OBJECTID        reduce using rule 26 (Expression -> RETURN Expression .)
+    CHAR_CONST      reduce using rule 26 (Expression -> RETURN Expression .)
+    FLOAT_CONST     reduce using rule 26 (Expression -> RETURN Expression .)
+    INT_CONST       reduce using rule 26 (Expression -> RETURN Expression .)
+    RETURN          reduce using rule 26 (Expression -> RETURN Expression .)
+    PRINT           reduce using rule 26 (Expression -> RETURN Expression .)
+    VOID            reduce using rule 26 (Expression -> RETURN Expression .)
+    CHAR            reduce using rule 26 (Expression -> RETURN Expression .)
+    FLOAT           reduce using rule 26 (Expression -> RETURN Expression .)
+    INT             reduce using rule 26 (Expression -> RETURN Expression .)
+    $end            reduce using rule 26 (Expression -> RETURN Expression .)
+    )               reduce using rule 26 (Expression -> RETURN Expression .)
+    ;               reduce using rule 26 (Expression -> RETURN Expression .)
+    ,               reduce using rule 26 (Expression -> RETURN Expression .)
+    |               shift and go to state 24
+    &               shift and go to state 25
+    !               shift and go to state 26
+    =               shift and go to state 27
+    >               shift and go to state 28
+    <               shift and go to state 29
+    /               shift and go to state 30
+    *               shift and go to state 31
+    -               shift and go to state 32
+    +               shift and go to state 33
+
+
+state 39
+
+    (27) Expression -> PRINT ( . STRING argumentos ) ;
+    (28) Expression -> PRINT ( . STRING ) ;
+    STRING          shift and go to state 55
+
+
+state 40
+
+    (36) Metodo -> tipo OBJECTID . ( listaFormales ) { bloque } ;
+    (37) Metodo -> tipo OBJECTID . ( ) { bloque } ;
+    (35) Atributo -> tipo OBJECTID . optAssign ;
+    (3) optAssign -> . = Expression
+    (4) optAssign -> .
+    (               shift and go to state 56
+    =               shift and go to state 58
+    ;               reduce using rule 4 (optAssign -> .)
+
+    optAssign                      shift and go to state 57
+
+state 41
+
+    (8) Expression -> Expression | | . Expression
+    (5) Expression -> . WHILE ( Expression ) { bloque }
+    (6) Expression -> . IF ( Expression ) { bloque } Continuacion
+    (7) Expression -> . IF ( Expression ) { bloque }
+    (8) Expression -> . Expression | | Expression
+    (9) Expression -> . Expression & & Expression
+    (10) Expression -> . ! Expression
+    (11) Expression -> . Expression ! = Expression
+    (12) Expression -> . Expression = = Expression
+    (13) Expression -> . Expression > = Expression
+    (14) Expression -> . Expression < = Expression
+    (15) Expression -> . Expression < Expression
+    (16) Expression -> . ( Expression )
+    (17) Expression -> . OBJECTID
+    (18) Expression -> . CHAR_CONST
+    (19) Expression -> . FLOAT_CONST
+    (20) Expression -> . INT_CONST
+    (21) Expression -> . Expression / Expression
+    (22) Expression -> . Expression * Expression
+    (23) Expression -> . Expression - Expression
+    (24) Expression -> . Expression + Expression
+    (25) Expression -> . RETURN
+    (26) Expression -> . RETURN Expression
+    (27) Expression -> . PRINT ( STRING argumentos ) ;
+    (28) Expression -> . PRINT ( STRING ) ;
+    WHILE           shift and go to state 7
+    IF              shift and go to state 9
+    !               shift and go to state 10
+    (               shift and go to state 8
+    OBJECTID        shift and go to state 11
+    CHAR_CONST      shift and go to state 12
+    FLOAT_CONST     shift and go to state 13
+    INT_CONST       shift and go to state 14
+    RETURN          shift and go to state 15
+    PRINT           shift and go to state 16
+
+    Expression                     shift and go to state 59
+
+state 42
+
+    (9) Expression -> Expression & & . Expression
+    (5) Expression -> . WHILE ( Expression ) { bloque }
+    (6) Expression -> . IF ( Expression ) { bloque } Continuacion
+    (7) Expression -> . IF ( Expression ) { bloque }
+    (8) Expression -> . Expression | | Expression
+    (9) Expression -> . Expression & & Expression
+    (10) Expression -> . ! Expression
+    (11) Expression -> . Expression ! = Expression
+    (12) Expression -> . Expression = = Expression
+    (13) Expression -> . Expression > = Expression
+    (14) Expression -> . Expression < = Expression
+    (15) Expression -> . Expression < Expression
+    (16) Expression -> . ( Expression )
+    (17) Expression -> . OBJECTID
+    (18) Expression -> . CHAR_CONST
+    (19) Expression -> . FLOAT_CONST
+    (20) Expression -> . INT_CONST
+    (21) Expression -> . Expression / Expression
+    (22) Expression -> . Expression * Expression
+    (23) Expression -> . Expression - Expression
+    (24) Expression -> . Expression + Expression
+    (25) Expression -> . RETURN
+    (26) Expression -> . RETURN Expression
+    (27) Expression -> . PRINT ( STRING argumentos ) ;
+    (28) Expression -> . PRINT ( STRING ) ;
+    WHILE           shift and go to state 7
+    IF              shift and go to state 9
+    !               shift and go to state 10
+    (               shift and go to state 8
+    OBJECTID        shift and go to state 11
+    CHAR_CONST      shift and go to state 12
+    FLOAT_CONST     shift and go to state 13
+    INT_CONST       shift and go to state 14
+    RETURN          shift and go to state 15
+    PRINT           shift and go to state 16
+
+    Expression                     shift and go to state 60
+
+state 43
+
+    (11) Expression -> Expression ! = . Expression
+    (5) Expression -> . WHILE ( Expression ) { bloque }
+    (6) Expression -> . IF ( Expression ) { bloque } Continuacion
+    (7) Expression -> . IF ( Expression ) { bloque }
+    (8) Expression -> . Expression | | Expression
+    (9) Expression -> . Expression & & Expression
+    (10) Expression -> . ! Expression
+    (11) Expression -> . Expression ! = Expression
+    (12) Expression -> . Expression = = Expression
+    (13) Expression -> . Expression > = Expression
+    (14) Expression -> . Expression < = Expression
+    (15) Expression -> . Expression < Expression
+    (16) Expression -> . ( Expression )
+    (17) Expression -> . OBJECTID
+    (18) Expression -> . CHAR_CONST
+    (19) Expression -> . FLOAT_CONST
+    (20) Expression -> . INT_CONST
+    (21) Expression -> . Expression / Expression
+    (22) Expression -> . Expression * Expression
+    (23) Expression -> . Expression - Expression
+    (24) Expression -> . Expression + Expression
+    (25) Expression -> . RETURN
+    (26) Expression -> . RETURN Expression
+    (27) Expression -> . PRINT ( STRING argumentos ) ;
+    (28) Expression -> . PRINT ( STRING ) ;
+    WHILE           shift and go to state 7
+    IF              shift and go to state 9
+    !               shift and go to state 10
+    (               shift and go to state 8
+    OBJECTID        shift and go to state 11
+    CHAR_CONST      shift and go to state 12
+    FLOAT_CONST     shift and go to state 13
+    INT_CONST       shift and go to state 14
+    RETURN          shift and go to state 15
+    PRINT           shift and go to state 16
+
+    Expression                     shift and go to state 61
+
+state 44
+
+    (12) Expression -> Expression = = . Expression
+    (5) Expression -> . WHILE ( Expression ) { bloque }
+    (6) Expression -> . IF ( Expression ) { bloque } Continuacion
+    (7) Expression -> . IF ( Expression ) { bloque }
+    (8) Expression -> . Expression | | Expression
+    (9) Expression -> . Expression & & Expression
+    (10) Expression -> . ! Expression
+    (11) Expression -> . Expression ! = Expression
+    (12) Expression -> . Expression = = Expression
+    (13) Expression -> . Expression > = Expression
+    (14) Expression -> . Expression < = Expression
+    (15) Expression -> . Expression < Expression
+    (16) Expression -> . ( Expression )
+    (17) Expression -> . OBJECTID
+    (18) Expression -> . CHAR_CONST
+    (19) Expression -> . FLOAT_CONST
+    (20) Expression -> . INT_CONST
+    (21) Expression -> . Expression / Expression
+    (22) Expression -> . Expression * Expression
+    (23) Expression -> . Expression - Expression
+    (24) Expression -> . Expression + Expression
+    (25) Expression -> . RETURN
+    (26) Expression -> . RETURN Expression
+    (27) Expression -> . PRINT ( STRING argumentos ) ;
+    (28) Expression -> . PRINT ( STRING ) ;
+    WHILE           shift and go to state 7
+    IF              shift and go to state 9
+    !               shift and go to state 10
+    (               shift and go to state 8
+    OBJECTID        shift and go to state 11
+    CHAR_CONST      shift and go to state 12
+    FLOAT_CONST     shift and go to state 13
+    INT_CONST       shift and go to state 14
+    RETURN          shift and go to state 15
+    PRINT           shift and go to state 16
+
+    Expression                     shift and go to state 62
+
+state 45
+
+    (13) Expression -> Expression > = . Expression
+    (5) Expression -> . WHILE ( Expression ) { bloque }
+    (6) Expression -> . IF ( Expression ) { bloque } Continuacion
+    (7) Expression -> . IF ( Expression ) { bloque }
+    (8) Expression -> . Expression | | Expression
+    (9) Expression -> . Expression & & Expression
+    (10) Expression -> . ! Expression
+    (11) Expression -> . Expression ! = Expression
+    (12) Expression -> . Expression = = Expression
+    (13) Expression -> . Expression > = Expression
+    (14) Expression -> . Expression < = Expression
+    (15) Expression -> . Expression < Expression
+    (16) Expression -> . ( Expression )
+    (17) Expression -> . OBJECTID
+    (18) Expression -> . CHAR_CONST
+    (19) Expression -> . FLOAT_CONST
+    (20) Expression -> . INT_CONST
+    (21) Expression -> . Expression / Expression
+    (22) Expression -> . Expression * Expression
+    (23) Expression -> . Expression - Expression
+    (24) Expression -> . Expression + Expression
+    (25) Expression -> . RETURN
+    (26) Expression -> . RETURN Expression
+    (27) Expression -> . PRINT ( STRING argumentos ) ;
+    (28) Expression -> . PRINT ( STRING ) ;
+    WHILE           shift and go to state 7
+    IF              shift and go to state 9
+    !               shift and go to state 10
+    (               shift and go to state 8
+    OBJECTID        shift and go to state 11
+    CHAR_CONST      shift and go to state 12
+    FLOAT_CONST     shift and go to state 13
+    INT_CONST       shift and go to state 14
+    RETURN          shift and go to state 15
+    PRINT           shift and go to state 16
+
+    Expression                     shift and go to state 63
+
+state 46
+
+    (15) Expression -> Expression < Expression .
+    (8) Expression -> Expression . | | Expression
+    (9) Expression -> Expression . & & Expression
+    (11) Expression -> Expression . ! = Expression
+    (12) Expression -> Expression . = = Expression
+    (13) Expression -> Expression . > = Expression
+    (14) Expression -> Expression . < = Expression
+    (15) Expression -> Expression . < Expression
+    (21) Expression -> Expression . / Expression
+    (22) Expression -> Expression . * Expression
+    (23) Expression -> Expression . - Expression
+    (24) Expression -> Expression . + Expression
+  ! shift/reduce conflict for | resolved as shift
+  ! shift/reduce conflict for & resolved as shift
+  ! shift/reduce conflict for ! resolved as shift
+  ! shift/reduce conflict for = resolved as shift
+  ! shift/reduce conflict for > resolved as shift
+  ! shift/reduce conflict for < resolved as shift
+  ! shift/reduce conflict for / resolved as shift
+  ! shift/reduce conflict for * resolved as shift
+  ! shift/reduce conflict for - resolved as shift
+  ! shift/reduce conflict for + resolved as shift
+    WHILE           reduce using rule 15 (Expression -> Expression < Expression .)
+    IF              reduce using rule 15 (Expression -> Expression < Expression .)
+    (               reduce using rule 15 (Expression -> Expression < Expression .)
+    OBJECTID        reduce using rule 15 (Expression -> Expression < Expression .)
+    CHAR_CONST      reduce using rule 15 (Expression -> Expression < Expression .)
+    FLOAT_CONST     reduce using rule 15 (Expression -> Expression < Expression .)
+    INT_CONST       reduce using rule 15 (Expression -> Expression < Expression .)
+    RETURN          reduce using rule 15 (Expression -> Expression < Expression .)
+    PRINT           reduce using rule 15 (Expression -> Expression < Expression .)
+    VOID            reduce using rule 15 (Expression -> Expression < Expression .)
+    CHAR            reduce using rule 15 (Expression -> Expression < Expression .)
+    FLOAT           reduce using rule 15 (Expression -> Expression < Expression .)
+    INT             reduce using rule 15 (Expression -> Expression < Expression .)
+    $end            reduce using rule 15 (Expression -> Expression < Expression .)
+    )               reduce using rule 15 (Expression -> Expression < Expression .)
+    ;               reduce using rule 15 (Expression -> Expression < Expression .)
+    ,               reduce using rule 15 (Expression -> Expression < Expression .)
+    |               shift and go to state 24
+    &               shift and go to state 25
+    !               shift and go to state 26
+    =               shift and go to state 27
+    >               shift and go to state 28
+    <               shift and go to state 29
+    /               shift and go to state 30
+    *               shift and go to state 31
+    -               shift and go to state 32
+    +               shift and go to state 33
+
+
+state 47
+
+    (14) Expression -> Expression < = . Expression
+    (5) Expression -> . WHILE ( Expression ) { bloque }
+    (6) Expression -> . IF ( Expression ) { bloque } Continuacion
+    (7) Expression -> . IF ( Expression ) { bloque }
+    (8) Expression -> . Expression | | Expression
+    (9) Expression -> . Expression & & Expression
+    (10) Expression -> . ! Expression
+    (11) Expression -> . Expression ! = Expression
+    (12) Expression -> . Expression = = Expression
+    (13) Expression -> . Expression > = Expression
+    (14) Expression -> . Expression < = Expression
+    (15) Expression -> . Expression < Expression
+    (16) Expression -> . ( Expression )
+    (17) Expression -> . OBJECTID
+    (18) Expression -> . CHAR_CONST
+    (19) Expression -> . FLOAT_CONST
+    (20) Expression -> . INT_CONST
+    (21) Expression -> . Expression / Expression
+    (22) Expression -> . Expression * Expression
+    (23) Expression -> . Expression - Expression
+    (24) Expression -> . Expression + Expression
+    (25) Expression -> . RETURN
+    (26) Expression -> . RETURN Expression
+    (27) Expression -> . PRINT ( STRING argumentos ) ;
+    (28) Expression -> . PRINT ( STRING ) ;
+    WHILE           shift and go to state 7
+    IF              shift and go to state 9
+    !               shift and go to state 10
+    (               shift and go to state 8
+    OBJECTID        shift and go to state 11
+    CHAR_CONST      shift and go to state 12
+    FLOAT_CONST     shift and go to state 13
+    INT_CONST       shift and go to state 14
+    RETURN          shift and go to state 15
+    PRINT           shift and go to state 16
+
+    Expression                     shift and go to state 64
+
+state 48
+
+    (21) Expression -> Expression / Expression .
+    (8) Expression -> Expression . | | Expression
+    (9) Expression -> Expression . & & Expression
+    (11) Expression -> Expression . ! = Expression
+    (12) Expression -> Expression . = = Expression
+    (13) Expression -> Expression . > = Expression
+    (14) Expression -> Expression . < = Expression
+    (15) Expression -> Expression . < Expression
+    (21) Expression -> Expression . / Expression
+    (22) Expression -> Expression . * Expression
+    (23) Expression -> Expression . - Expression
+    (24) Expression -> Expression . + Expression
+  ! shift/reduce conflict for | resolved as shift
+  ! shift/reduce conflict for & resolved as shift
+  ! shift/reduce conflict for ! resolved as shift
+  ! shift/reduce conflict for = resolved as shift
+  ! shift/reduce conflict for > resolved as shift
+  ! shift/reduce conflict for < resolved as shift
+  ! shift/reduce conflict for / resolved as shift
+  ! shift/reduce conflict for * resolved as shift
+  ! shift/reduce conflict for - resolved as shift
+  ! shift/reduce conflict for + resolved as shift
+    WHILE           reduce using rule 21 (Expression -> Expression / Expression .)
+    IF              reduce using rule 21 (Expression -> Expression / Expression .)
+    (               reduce using rule 21 (Expression -> Expression / Expression .)
+    OBJECTID        reduce using rule 21 (Expression -> Expression / Expression .)
+    CHAR_CONST      reduce using rule 21 (Expression -> Expression / Expression .)
+    FLOAT_CONST     reduce using rule 21 (Expression -> Expression / Expression .)
+    INT_CONST       reduce using rule 21 (Expression -> Expression / Expression .)
+    RETURN          reduce using rule 21 (Expression -> Expression / Expression .)
+    PRINT           reduce using rule 21 (Expression -> Expression / Expression .)
+    VOID            reduce using rule 21 (Expression -> Expression / Expression .)
+    CHAR            reduce using rule 21 (Expression -> Expression / Expression .)
+    FLOAT           reduce using rule 21 (Expression -> Expression / Expression .)
+    INT             reduce using rule 21 (Expression -> Expression / Expression .)
+    $end            reduce using rule 21 (Expression -> Expression / Expression .)
+    )               reduce using rule 21 (Expression -> Expression / Expression .)
+    ;               reduce using rule 21 (Expression -> Expression / Expression .)
+    ,               reduce using rule 21 (Expression -> Expression / Expression .)
+    |               shift and go to state 24
+    &               shift and go to state 25
+    !               shift and go to state 26
+    =               shift and go to state 27
+    >               shift and go to state 28
+    <               shift and go to state 29
+    /               shift and go to state 30
+    *               shift and go to state 31
+    -               shift and go to state 32
+    +               shift and go to state 33
+
+
+state 49
+
+    (22) Expression -> Expression * Expression .
+    (8) Expression -> Expression . | | Expression
+    (9) Expression -> Expression . & & Expression
+    (11) Expression -> Expression . ! = Expression
+    (12) Expression -> Expression . = = Expression
+    (13) Expression -> Expression . > = Expression
+    (14) Expression -> Expression . < = Expression
+    (15) Expression -> Expression . < Expression
+    (21) Expression -> Expression . / Expression
+    (22) Expression -> Expression . * Expression
+    (23) Expression -> Expression . - Expression
+    (24) Expression -> Expression . + Expression
+  ! shift/reduce conflict for | resolved as shift
+  ! shift/reduce conflict for & resolved as shift
+  ! shift/reduce conflict for ! resolved as shift
+  ! shift/reduce conflict for = resolved as shift
+  ! shift/reduce conflict for > resolved as shift
+  ! shift/reduce conflict for < resolved as shift
+  ! shift/reduce conflict for / resolved as shift
+  ! shift/reduce conflict for * resolved as shift
+  ! shift/reduce conflict for - resolved as shift
+  ! shift/reduce conflict for + resolved as shift
+    WHILE           reduce using rule 22 (Expression -> Expression * Expression .)
+    IF              reduce using rule 22 (Expression -> Expression * Expression .)
+    (               reduce using rule 22 (Expression -> Expression * Expression .)
+    OBJECTID        reduce using rule 22 (Expression -> Expression * Expression .)
+    CHAR_CONST      reduce using rule 22 (Expression -> Expression * Expression .)
+    FLOAT_CONST     reduce using rule 22 (Expression -> Expression * Expression .)
+    INT_CONST       reduce using rule 22 (Expression -> Expression * Expression .)
+    RETURN          reduce using rule 22 (Expression -> Expression * Expression .)
+    PRINT           reduce using rule 22 (Expression -> Expression * Expression .)
+    VOID            reduce using rule 22 (Expression -> Expression * Expression .)
+    CHAR            reduce using rule 22 (Expression -> Expression * Expression .)
+    FLOAT           reduce using rule 22 (Expression -> Expression * Expression .)
+    INT             reduce using rule 22 (Expression -> Expression * Expression .)
+    $end            reduce using rule 22 (Expression -> Expression * Expression .)
+    )               reduce using rule 22 (Expression -> Expression * Expression .)
+    ;               reduce using rule 22 (Expression -> Expression * Expression .)
+    ,               reduce using rule 22 (Expression -> Expression * Expression .)
+    |               shift and go to state 24
+    &               shift and go to state 25
+    !               shift and go to state 26
+    =               shift and go to state 27
+    >               shift and go to state 28
+    <               shift and go to state 29
+    /               shift and go to state 30
+    *               shift and go to state 31
+    -               shift and go to state 32
+    +               shift and go to state 33
+
+
+state 50
+
+    (23) Expression -> Expression - Expression .
+    (8) Expression -> Expression . | | Expression
+    (9) Expression -> Expression . & & Expression
+    (11) Expression -> Expression . ! = Expression
+    (12) Expression -> Expression . = = Expression
+    (13) Expression -> Expression . > = Expression
+    (14) Expression -> Expression . < = Expression
+    (15) Expression -> Expression . < Expression
+    (21) Expression -> Expression . / Expression
+    (22) Expression -> Expression . * Expression
+    (23) Expression -> Expression . - Expression
+    (24) Expression -> Expression . + Expression
+  ! shift/reduce conflict for | resolved as shift
+  ! shift/reduce conflict for & resolved as shift
+  ! shift/reduce conflict for ! resolved as shift
+  ! shift/reduce conflict for = resolved as shift
+  ! shift/reduce conflict for > resolved as shift
+  ! shift/reduce conflict for < resolved as shift
+  ! shift/reduce conflict for / resolved as shift
+  ! shift/reduce conflict for * resolved as shift
+  ! shift/reduce conflict for - resolved as shift
+  ! shift/reduce conflict for + resolved as shift
+    WHILE           reduce using rule 23 (Expression -> Expression - Expression .)
+    IF              reduce using rule 23 (Expression -> Expression - Expression .)
+    (               reduce using rule 23 (Expression -> Expression - Expression .)
+    OBJECTID        reduce using rule 23 (Expression -> Expression - Expression .)
+    CHAR_CONST      reduce using rule 23 (Expression -> Expression - Expression .)
+    FLOAT_CONST     reduce using rule 23 (Expression -> Expression - Expression .)
+    INT_CONST       reduce using rule 23 (Expression -> Expression - Expression .)
+    RETURN          reduce using rule 23 (Expression -> Expression - Expression .)
+    PRINT           reduce using rule 23 (Expression -> Expression - Expression .)
+    VOID            reduce using rule 23 (Expression -> Expression - Expression .)
+    CHAR            reduce using rule 23 (Expression -> Expression - Expression .)
+    FLOAT           reduce using rule 23 (Expression -> Expression - Expression .)
+    INT             reduce using rule 23 (Expression -> Expression - Expression .)
+    $end            reduce using rule 23 (Expression -> Expression - Expression .)
+    )               reduce using rule 23 (Expression -> Expression - Expression .)
+    ;               reduce using rule 23 (Expression -> Expression - Expression .)
+    ,               reduce using rule 23 (Expression -> Expression - Expression .)
+    |               shift and go to state 24
+    &               shift and go to state 25
+    !               shift and go to state 26
+    =               shift and go to state 27
+    >               shift and go to state 28
+    <               shift and go to state 29
+    /               shift and go to state 30
+    *               shift and go to state 31
+    -               shift and go to state 32
+    +               shift and go to state 33
+
+
+state 51
+
+    (24) Expression -> Expression + Expression .
+    (8) Expression -> Expression . | | Expression
+    (9) Expression -> Expression . & & Expression
+    (11) Expression -> Expression . ! = Expression
+    (12) Expression -> Expression . = = Expression
+    (13) Expression -> Expression . > = Expression
+    (14) Expression -> Expression . < = Expression
+    (15) Expression -> Expression . < Expression
+    (21) Expression -> Expression . / Expression
+    (22) Expression -> Expression . * Expression
+    (23) Expression -> Expression . - Expression
+    (24) Expression -> Expression . + Expression
+  ! shift/reduce conflict for | resolved as shift
+  ! shift/reduce conflict for & resolved as shift
+  ! shift/reduce conflict for ! resolved as shift
+  ! shift/reduce conflict for = resolved as shift
+  ! shift/reduce conflict for > resolved as shift
+  ! shift/reduce conflict for < resolved as shift
+  ! shift/reduce conflict for / resolved as shift
+  ! shift/reduce conflict for * resolved as shift
+  ! shift/reduce conflict for - resolved as shift
+  ! shift/reduce conflict for + resolved as shift
+    WHILE           reduce using rule 24 (Expression -> Expression + Expression .)
+    IF              reduce using rule 24 (Expression -> Expression + Expression .)
+    (               reduce using rule 24 (Expression -> Expression + Expression .)
+    OBJECTID        reduce using rule 24 (Expression -> Expression + Expression .)
+    CHAR_CONST      reduce using rule 24 (Expression -> Expression + Expression .)
+    FLOAT_CONST     reduce using rule 24 (Expression -> Expression + Expression .)
+    INT_CONST       reduce using rule 24 (Expression -> Expression + Expression .)
+    RETURN          reduce using rule 24 (Expression -> Expression + Expression .)
+    PRINT           reduce using rule 24 (Expression -> Expression + Expression .)
+    VOID            reduce using rule 24 (Expression -> Expression + Expression .)
+    CHAR            reduce using rule 24 (Expression -> Expression + Expression .)
+    FLOAT           reduce using rule 24 (Expression -> Expression + Expression .)
+    INT             reduce using rule 24 (Expression -> Expression + Expression .)
+    $end            reduce using rule 24 (Expression -> Expression + Expression .)
+    )               reduce using rule 24 (Expression -> Expression + Expression .)
+    ;               reduce using rule 24 (Expression -> Expression + Expression .)
+    ,               reduce using rule 24 (Expression -> Expression + Expression .)
+    |               shift and go to state 24
+    &               shift and go to state 25
+    !               shift and go to state 26
+    =               shift and go to state 27
+    >               shift and go to state 28
+    <               shift and go to state 29
+    /               shift and go to state 30
+    *               shift and go to state 31
+    -               shift and go to state 32
+    +               shift and go to state 33
+
+
+state 52
+
+    (5) Expression -> WHILE ( Expression . ) { bloque }
+    (8) Expression -> Expression . | | Expression
+    (9) Expression -> Expression . & & Expression
+    (11) Expression -> Expression . ! = Expression
+    (12) Expression -> Expression . = = Expression
+    (13) Expression -> Expression . > = Expression
+    (14) Expression -> Expression . < = Expression
+    (15) Expression -> Expression . < Expression
+    (21) Expression -> Expression . / Expression
+    (22) Expression -> Expression . * Expression
+    (23) Expression -> Expression . - Expression
+    (24) Expression -> Expression . + Expression
+    )               shift and go to state 65
+    |               shift and go to state 24
+    &               shift and go to state 25
+    !               shift and go to state 26
+    =               shift and go to state 27
+    >               shift and go to state 28
+    <               shift and go to state 29
+    /               shift and go to state 30
+    *               shift and go to state 31
+    -               shift and go to state 32
+    +               shift and go to state 33
+
+
+state 53
+
+    (16) Expression -> ( Expression ) .
+    |               reduce using rule 16 (Expression -> ( Expression ) .)
+    &               reduce using rule 16 (Expression -> ( Expression ) .)
+    !               reduce using rule 16 (Expression -> ( Expression ) .)
+    =               reduce using rule 16 (Expression -> ( Expression ) .)
+    >               reduce using rule 16 (Expression -> ( Expression ) .)
+    <               reduce using rule 16 (Expression -> ( Expression ) .)
+    /               reduce using rule 16 (Expression -> ( Expression ) .)
+    *               reduce using rule 16 (Expression -> ( Expression ) .)
+    -               reduce using rule 16 (Expression -> ( Expression ) .)
+    +               reduce using rule 16 (Expression -> ( Expression ) .)
+    WHILE           reduce using rule 16 (Expression -> ( Expression ) .)
+    IF              reduce using rule 16 (Expression -> ( Expression ) .)
+    (               reduce using rule 16 (Expression -> ( Expression ) .)
+    OBJECTID        reduce using rule 16 (Expression -> ( Expression ) .)
+    CHAR_CONST      reduce using rule 16 (Expression -> ( Expression ) .)
+    FLOAT_CONST     reduce using rule 16 (Expression -> ( Expression ) .)
+    INT_CONST       reduce using rule 16 (Expression -> ( Expression ) .)
+    RETURN          reduce using rule 16 (Expression -> ( Expression ) .)
+    PRINT           reduce using rule 16 (Expression -> ( Expression ) .)
+    VOID            reduce using rule 16 (Expression -> ( Expression ) .)
+    CHAR            reduce using rule 16 (Expression -> ( Expression ) .)
+    FLOAT           reduce using rule 16 (Expression -> ( Expression ) .)
+    INT             reduce using rule 16 (Expression -> ( Expression ) .)
+    $end            reduce using rule 16 (Expression -> ( Expression ) .)
+    )               reduce using rule 16 (Expression -> ( Expression ) .)
+    ;               reduce using rule 16 (Expression -> ( Expression ) .)
+    ,               reduce using rule 16 (Expression -> ( Expression ) .)
+
+
+state 54
+
+    (6) Expression -> IF ( Expression . ) { bloque } Continuacion
+    (7) Expression -> IF ( Expression . ) { bloque }
+    (8) Expression -> Expression . | | Expression
+    (9) Expression -> Expression . & & Expression
+    (11) Expression -> Expression . ! = Expression
+    (12) Expression -> Expression . = = Expression
+    (13) Expression -> Expression . > = Expression
+    (14) Expression -> Expression . < = Expression
+    (15) Expression -> Expression . < Expression
+    (21) Expression -> Expression . / Expression
+    (22) Expression -> Expression . * Expression
+    (23) Expression -> Expression . - Expression
+    (24) Expression -> Expression . + Expression
+    )               shift and go to state 66
+    |               shift and go to state 24
+    &               shift and go to state 25
+    !               shift and go to state 26
+    =               shift and go to state 27
+    >               shift and go to state 28
+    <               shift and go to state 29
+    /               shift and go to state 30
+    *               shift and go to state 31
+    -               shift and go to state 32
+    +               shift and go to state 33
+
+
+state 55
+
+    (27) Expression -> PRINT ( STRING . argumentos ) ;
+    (28) Expression -> PRINT ( STRING . ) ;
+    (29) argumentos -> . , Expression argumentos
+    (30) argumentos -> . , Expression
+    )               shift and go to state 68
+    ,               shift and go to state 69
+
+    argumentos                     shift and go to state 67
+
+state 56
+
+    (36) Metodo -> tipo OBJECTID ( . listaFormales ) { bloque } ;
+    (37) Metodo -> tipo OBJECTID ( . ) { bloque } ;
+    (38) listaFormales -> . Formal
+    (39) Formal -> . tipo OBJECTID
+    (31) tipo -> . VOID
+    (32) tipo -> . CHAR
+    (33) tipo -> . FLOAT
+    (34) tipo -> . INT
+    )               shift and go to state 72
+    VOID            shift and go to state 18
+    CHAR            shift and go to state 19
+    FLOAT           shift and go to state 20
+    INT             shift and go to state 21
+
+    tipo                           shift and go to state 70
+    listaFormales                  shift and go to state 71
+    Formal                         shift and go to state 73
+
+state 57
+
+    (35) Atributo -> tipo OBJECTID optAssign . ;
+    ;               shift and go to state 74
+
+
+state 58
+
+    (3) optAssign -> = . Expression
+    (5) Expression -> . WHILE ( Expression ) { bloque }
+    (6) Expression -> . IF ( Expression ) { bloque } Continuacion
+    (7) Expression -> . IF ( Expression ) { bloque }
+    (8) Expression -> . Expression | | Expression
+    (9) Expression -> . Expression & & Expression
+    (10) Expression -> . ! Expression
+    (11) Expression -> . Expression ! = Expression
+    (12) Expression -> . Expression = = Expression
+    (13) Expression -> . Expression > = Expression
+    (14) Expression -> . Expression < = Expression
+    (15) Expression -> . Expression < Expression
+    (16) Expression -> . ( Expression )
+    (17) Expression -> . OBJECTID
+    (18) Expression -> . CHAR_CONST
+    (19) Expression -> . FLOAT_CONST
+    (20) Expression -> . INT_CONST
+    (21) Expression -> . Expression / Expression
+    (22) Expression -> . Expression * Expression
+    (23) Expression -> . Expression - Expression
+    (24) Expression -> . Expression + Expression
+    (25) Expression -> . RETURN
+    (26) Expression -> . RETURN Expression
+    (27) Expression -> . PRINT ( STRING argumentos ) ;
+    (28) Expression -> . PRINT ( STRING ) ;
+    WHILE           shift and go to state 7
+    IF              shift and go to state 9
+    !               shift and go to state 10
+    (               shift and go to state 8
+    OBJECTID        shift and go to state 11
+    CHAR_CONST      shift and go to state 12
+    FLOAT_CONST     shift and go to state 13
+    INT_CONST       shift and go to state 14
+    RETURN          shift and go to state 15
+    PRINT           shift and go to state 16
+
+    Expression                     shift and go to state 75
+
+state 59
+
+    (8) Expression -> Expression | | Expression .
+    (8) Expression -> Expression . | | Expression
+    (9) Expression -> Expression . & & Expression
+    (11) Expression -> Expression . ! = Expression
+    (12) Expression -> Expression . = = Expression
+    (13) Expression -> Expression . > = Expression
+    (14) Expression -> Expression . < = Expression
+    (15) Expression -> Expression . < Expression
+    (21) Expression -> Expression . / Expression
+    (22) Expression -> Expression . * Expression
+    (23) Expression -> Expression . - Expression
+    (24) Expression -> Expression . + Expression
+  ! shift/reduce conflict for | resolved as shift
+  ! shift/reduce conflict for & resolved as shift
+  ! shift/reduce conflict for ! resolved as shift
+  ! shift/reduce conflict for = resolved as shift
+  ! shift/reduce conflict for > resolved as shift
+  ! shift/reduce conflict for < resolved as shift
+  ! shift/reduce conflict for / resolved as shift
+  ! shift/reduce conflict for * resolved as shift
+  ! shift/reduce conflict for - resolved as shift
+  ! shift/reduce conflict for + resolved as shift
+    WHILE           reduce using rule 8 (Expression -> Expression | | Expression .)
+    IF              reduce using rule 8 (Expression -> Expression | | Expression .)
+    (               reduce using rule 8 (Expression -> Expression | | Expression .)
+    OBJECTID        reduce using rule 8 (Expression -> Expression | | Expression .)
+    CHAR_CONST      reduce using rule 8 (Expression -> Expression | | Expression .)
+    FLOAT_CONST     reduce using rule 8 (Expression -> Expression | | Expression .)
+    INT_CONST       reduce using rule 8 (Expression -> Expression | | Expression .)
+    RETURN          reduce using rule 8 (Expression -> Expression | | Expression .)
+    PRINT           reduce using rule 8 (Expression -> Expression | | Expression .)
+    VOID            reduce using rule 8 (Expression -> Expression | | Expression .)
+    CHAR            reduce using rule 8 (Expression -> Expression | | Expression .)
+    FLOAT           reduce using rule 8 (Expression -> Expression | | Expression .)
+    INT             reduce using rule 8 (Expression -> Expression | | Expression .)
+    $end            reduce using rule 8 (Expression -> Expression | | Expression .)
+    )               reduce using rule 8 (Expression -> Expression | | Expression .)
+    ;               reduce using rule 8 (Expression -> Expression | | Expression .)
+    ,               reduce using rule 8 (Expression -> Expression | | Expression .)
+    |               shift and go to state 24
+    &               shift and go to state 25
+    !               shift and go to state 26
+    =               shift and go to state 27
+    >               shift and go to state 28
+    <               shift and go to state 29
+    /               shift and go to state 30
+    *               shift and go to state 31
+    -               shift and go to state 32
+    +               shift and go to state 33
+
+
+state 60
+
+    (9) Expression -> Expression & & Expression .
+    (8) Expression -> Expression . | | Expression
+    (9) Expression -> Expression . & & Expression
+    (11) Expression -> Expression . ! = Expression
+    (12) Expression -> Expression . = = Expression
+    (13) Expression -> Expression . > = Expression
+    (14) Expression -> Expression . < = Expression
+    (15) Expression -> Expression . < Expression
+    (21) Expression -> Expression . / Expression
+    (22) Expression -> Expression . * Expression
+    (23) Expression -> Expression . - Expression
+    (24) Expression -> Expression . + Expression
+  ! shift/reduce conflict for | resolved as shift
+  ! shift/reduce conflict for & resolved as shift
+  ! shift/reduce conflict for ! resolved as shift
+  ! shift/reduce conflict for = resolved as shift
+  ! shift/reduce conflict for > resolved as shift
+  ! shift/reduce conflict for < resolved as shift
+  ! shift/reduce conflict for / resolved as shift
+  ! shift/reduce conflict for * resolved as shift
+  ! shift/reduce conflict for - resolved as shift
+  ! shift/reduce conflict for + resolved as shift
+    WHILE           reduce using rule 9 (Expression -> Expression & & Expression .)
+    IF              reduce using rule 9 (Expression -> Expression & & Expression .)
+    (               reduce using rule 9 (Expression -> Expression & & Expression .)
+    OBJECTID        reduce using rule 9 (Expression -> Expression & & Expression .)
+    CHAR_CONST      reduce using rule 9 (Expression -> Expression & & Expression .)
+    FLOAT_CONST     reduce using rule 9 (Expression -> Expression & & Expression .)
+    INT_CONST       reduce using rule 9 (Expression -> Expression & & Expression .)
+    RETURN          reduce using rule 9 (Expression -> Expression & & Expression .)
+    PRINT           reduce using rule 9 (Expression -> Expression & & Expression .)
+    VOID            reduce using rule 9 (Expression -> Expression & & Expression .)
+    CHAR            reduce using rule 9 (Expression -> Expression & & Expression .)
+    FLOAT           reduce using rule 9 (Expression -> Expression & & Expression .)
+    INT             reduce using rule 9 (Expression -> Expression & & Expression .)
+    $end            reduce using rule 9 (Expression -> Expression & & Expression .)
+    )               reduce using rule 9 (Expression -> Expression & & Expression .)
+    ;               reduce using rule 9 (Expression -> Expression & & Expression .)
+    ,               reduce using rule 9 (Expression -> Expression & & Expression .)
+    |               shift and go to state 24
+    &               shift and go to state 25
+    !               shift and go to state 26
+    =               shift and go to state 27
+    >               shift and go to state 28
+    <               shift and go to state 29
+    /               shift and go to state 30
+    *               shift and go to state 31
+    -               shift and go to state 32
+    +               shift and go to state 33
+
+
+state 61
+
+    (11) Expression -> Expression ! = Expression .
+    (8) Expression -> Expression . | | Expression
+    (9) Expression -> Expression . & & Expression
+    (11) Expression -> Expression . ! = Expression
+    (12) Expression -> Expression . = = Expression
+    (13) Expression -> Expression . > = Expression
+    (14) Expression -> Expression . < = Expression
+    (15) Expression -> Expression . < Expression
+    (21) Expression -> Expression . / Expression
+    (22) Expression -> Expression . * Expression
+    (23) Expression -> Expression . - Expression
+    (24) Expression -> Expression . + Expression
+  ! shift/reduce conflict for | resolved as shift
+  ! shift/reduce conflict for & resolved as shift
+  ! shift/reduce conflict for ! resolved as shift
+  ! shift/reduce conflict for = resolved as shift
+  ! shift/reduce conflict for > resolved as shift
+  ! shift/reduce conflict for < resolved as shift
+  ! shift/reduce conflict for / resolved as shift
+  ! shift/reduce conflict for * resolved as shift
+  ! shift/reduce conflict for - resolved as shift
+  ! shift/reduce conflict for + resolved as shift
+    WHILE           reduce using rule 11 (Expression -> Expression ! = Expression .)
+    IF              reduce using rule 11 (Expression -> Expression ! = Expression .)
+    (               reduce using rule 11 (Expression -> Expression ! = Expression .)
+    OBJECTID        reduce using rule 11 (Expression -> Expression ! = Expression .)
+    CHAR_CONST      reduce using rule 11 (Expression -> Expression ! = Expression .)
+    FLOAT_CONST     reduce using rule 11 (Expression -> Expression ! = Expression .)
+    INT_CONST       reduce using rule 11 (Expression -> Expression ! = Expression .)
+    RETURN          reduce using rule 11 (Expression -> Expression ! = Expression .)
+    PRINT           reduce using rule 11 (Expression -> Expression ! = Expression .)
+    VOID            reduce using rule 11 (Expression -> Expression ! = Expression .)
+    CHAR            reduce using rule 11 (Expression -> Expression ! = Expression .)
+    FLOAT           reduce using rule 11 (Expression -> Expression ! = Expression .)
+    INT             reduce using rule 11 (Expression -> Expression ! = Expression .)
+    $end            reduce using rule 11 (Expression -> Expression ! = Expression .)
+    )               reduce using rule 11 (Expression -> Expression ! = Expression .)
+    ;               reduce using rule 11 (Expression -> Expression ! = Expression .)
+    ,               reduce using rule 11 (Expression -> Expression ! = Expression .)
+    |               shift and go to state 24
+    &               shift and go to state 25
+    !               shift and go to state 26
+    =               shift and go to state 27
+    >               shift and go to state 28
+    <               shift and go to state 29
+    /               shift and go to state 30
+    *               shift and go to state 31
+    -               shift and go to state 32
+    +               shift and go to state 33
+
+
+state 62
+
+    (12) Expression -> Expression = = Expression .
+    (8) Expression -> Expression . | | Expression
+    (9) Expression -> Expression . & & Expression
+    (11) Expression -> Expression . ! = Expression
+    (12) Expression -> Expression . = = Expression
+    (13) Expression -> Expression . > = Expression
+    (14) Expression -> Expression . < = Expression
+    (15) Expression -> Expression . < Expression
+    (21) Expression -> Expression . / Expression
+    (22) Expression -> Expression . * Expression
+    (23) Expression -> Expression . - Expression
+    (24) Expression -> Expression . + Expression
+  ! shift/reduce conflict for | resolved as shift
+  ! shift/reduce conflict for & resolved as shift
+  ! shift/reduce conflict for ! resolved as shift
+  ! shift/reduce conflict for = resolved as shift
+  ! shift/reduce conflict for > resolved as shift
+  ! shift/reduce conflict for < resolved as shift
+  ! shift/reduce conflict for / resolved as shift
+  ! shift/reduce conflict for * resolved as shift
+  ! shift/reduce conflict for - resolved as shift
+  ! shift/reduce conflict for + resolved as shift
+    WHILE           reduce using rule 12 (Expression -> Expression = = Expression .)
+    IF              reduce using rule 12 (Expression -> Expression = = Expression .)
+    (               reduce using rule 12 (Expression -> Expression = = Expression .)
+    OBJECTID        reduce using rule 12 (Expression -> Expression = = Expression .)
+    CHAR_CONST      reduce using rule 12 (Expression -> Expression = = Expression .)
+    FLOAT_CONST     reduce using rule 12 (Expression -> Expression = = Expression .)
+    INT_CONST       reduce using rule 12 (Expression -> Expression = = Expression .)
+    RETURN          reduce using rule 12 (Expression -> Expression = = Expression .)
+    PRINT           reduce using rule 12 (Expression -> Expression = = Expression .)
+    VOID            reduce using rule 12 (Expression -> Expression = = Expression .)
+    CHAR            reduce using rule 12 (Expression -> Expression = = Expression .)
+    FLOAT           reduce using rule 12 (Expression -> Expression = = Expression .)
+    INT             reduce using rule 12 (Expression -> Expression = = Expression .)
+    $end            reduce using rule 12 (Expression -> Expression = = Expression .)
+    )               reduce using rule 12 (Expression -> Expression = = Expression .)
+    ;               reduce using rule 12 (Expression -> Expression = = Expression .)
+    ,               reduce using rule 12 (Expression -> Expression = = Expression .)
+    |               shift and go to state 24
+    &               shift and go to state 25
+    !               shift and go to state 26
+    =               shift and go to state 27
+    >               shift and go to state 28
+    <               shift and go to state 29
+    /               shift and go to state 30
+    *               shift and go to state 31
+    -               shift and go to state 32
+    +               shift and go to state 33
+
+
+state 63
+
+    (13) Expression -> Expression > = Expression .
+    (8) Expression -> Expression . | | Expression
+    (9) Expression -> Expression . & & Expression
+    (11) Expression -> Expression . ! = Expression
+    (12) Expression -> Expression . = = Expression
+    (13) Expression -> Expression . > = Expression
+    (14) Expression -> Expression . < = Expression
+    (15) Expression -> Expression . < Expression
+    (21) Expression -> Expression . / Expression
+    (22) Expression -> Expression . * Expression
+    (23) Expression -> Expression . - Expression
+    (24) Expression -> Expression . + Expression
+  ! shift/reduce conflict for | resolved as shift
+  ! shift/reduce conflict for & resolved as shift
+  ! shift/reduce conflict for ! resolved as shift
+  ! shift/reduce conflict for = resolved as shift
+  ! shift/reduce conflict for > resolved as shift
+  ! shift/reduce conflict for < resolved as shift
+  ! shift/reduce conflict for / resolved as shift
+  ! shift/reduce conflict for * resolved as shift
+  ! shift/reduce conflict for - resolved as shift
+  ! shift/reduce conflict for + resolved as shift
+    WHILE           reduce using rule 13 (Expression -> Expression > = Expression .)
+    IF              reduce using rule 13 (Expression -> Expression > = Expression .)
+    (               reduce using rule 13 (Expression -> Expression > = Expression .)
+    OBJECTID        reduce using rule 13 (Expression -> Expression > = Expression .)
+    CHAR_CONST      reduce using rule 13 (Expression -> Expression > = Expression .)
+    FLOAT_CONST     reduce using rule 13 (Expression -> Expression > = Expression .)
+    INT_CONST       reduce using rule 13 (Expression -> Expression > = Expression .)
+    RETURN          reduce using rule 13 (Expression -> Expression > = Expression .)
+    PRINT           reduce using rule 13 (Expression -> Expression > = Expression .)
+    VOID            reduce using rule 13 (Expression -> Expression > = Expression .)
+    CHAR            reduce using rule 13 (Expression -> Expression > = Expression .)
+    FLOAT           reduce using rule 13 (Expression -> Expression > = Expression .)
+    INT             reduce using rule 13 (Expression -> Expression > = Expression .)
+    $end            reduce using rule 13 (Expression -> Expression > = Expression .)
+    )               reduce using rule 13 (Expression -> Expression > = Expression .)
+    ;               reduce using rule 13 (Expression -> Expression > = Expression .)
+    ,               reduce using rule 13 (Expression -> Expression > = Expression .)
+    |               shift and go to state 24
+    &               shift and go to state 25
+    !               shift and go to state 26
+    =               shift and go to state 27
+    >               shift and go to state 28
+    <               shift and go to state 29
+    /               shift and go to state 30
+    *               shift and go to state 31
+    -               shift and go to state 32
+    +               shift and go to state 33
+
+
+state 64
+
+    (14) Expression -> Expression < = Expression .
+    (8) Expression -> Expression . | | Expression
+    (9) Expression -> Expression . & & Expression
+    (11) Expression -> Expression . ! = Expression
+    (12) Expression -> Expression . = = Expression
+    (13) Expression -> Expression . > = Expression
+    (14) Expression -> Expression . < = Expression
+    (15) Expression -> Expression . < Expression
+    (21) Expression -> Expression . / Expression
+    (22) Expression -> Expression . * Expression
+    (23) Expression -> Expression . - Expression
+    (24) Expression -> Expression . + Expression
+  ! shift/reduce conflict for | resolved as shift
+  ! shift/reduce conflict for & resolved as shift
+  ! shift/reduce conflict for ! resolved as shift
+  ! shift/reduce conflict for = resolved as shift
+  ! shift/reduce conflict for > resolved as shift
+  ! shift/reduce conflict for < resolved as shift
+  ! shift/reduce conflict for / resolved as shift
+  ! shift/reduce conflict for * resolved as shift
+  ! shift/reduce conflict for - resolved as shift
+  ! shift/reduce conflict for + resolved as shift
+    WHILE           reduce using rule 14 (Expression -> Expression < = Expression .)
+    IF              reduce using rule 14 (Expression -> Expression < = Expression .)
+    (               reduce using rule 14 (Expression -> Expression < = Expression .)
+    OBJECTID        reduce using rule 14 (Expression -> Expression < = Expression .)
+    CHAR_CONST      reduce using rule 14 (Expression -> Expression < = Expression .)
+    FLOAT_CONST     reduce using rule 14 (Expression -> Expression < = Expression .)
+    INT_CONST       reduce using rule 14 (Expression -> Expression < = Expression .)
+    RETURN          reduce using rule 14 (Expression -> Expression < = Expression .)
+    PRINT           reduce using rule 14 (Expression -> Expression < = Expression .)
+    VOID            reduce using rule 14 (Expression -> Expression < = Expression .)
+    CHAR            reduce using rule 14 (Expression -> Expression < = Expression .)
+    FLOAT           reduce using rule 14 (Expression -> Expression < = Expression .)
+    INT             reduce using rule 14 (Expression -> Expression < = Expression .)
+    $end            reduce using rule 14 (Expression -> Expression < = Expression .)
+    )               reduce using rule 14 (Expression -> Expression < = Expression .)
+    ;               reduce using rule 14 (Expression -> Expression < = Expression .)
+    ,               reduce using rule 14 (Expression -> Expression < = Expression .)
+    |               shift and go to state 24
+    &               shift and go to state 25
+    !               shift and go to state 26
+    =               shift and go to state 27
+    >               shift and go to state 28
+    <               shift and go to state 29
+    /               shift and go to state 30
+    *               shift and go to state 31
+    -               shift and go to state 32
+    +               shift and go to state 33
+
+
+state 65
+
+    (5) Expression -> WHILE ( Expression ) . { bloque }
+    {               shift and go to state 76
+
+
+state 66
+
+    (6) Expression -> IF ( Expression ) . { bloque } Continuacion
+    (7) Expression -> IF ( Expression ) . { bloque }
+    {               shift and go to state 77
+
+
+state 67
+
+    (27) Expression -> PRINT ( STRING argumentos . ) ;
+    )               shift and go to state 78
+
+
+state 68
+
+    (28) Expression -> PRINT ( STRING ) . ;
+    ;               shift and go to state 79
+
+
+state 69
+
+    (29) argumentos -> , . Expression argumentos
+    (30) argumentos -> , . Expression
+    (5) Expression -> . WHILE ( Expression ) { bloque }
+    (6) Expression -> . IF ( Expression ) { bloque } Continuacion
+    (7) Expression -> . IF ( Expression ) { bloque }
+    (8) Expression -> . Expression | | Expression
+    (9) Expression -> . Expression & & Expression
+    (10) Expression -> . ! Expression
+    (11) Expression -> . Expression ! = Expression
+    (12) Expression -> . Expression = = Expression
+    (13) Expression -> . Expression > = Expression
+    (14) Expression -> . Expression < = Expression
+    (15) Expression -> . Expression < Expression
+    (16) Expression -> . ( Expression )
+    (17) Expression -> . OBJECTID
+    (18) Expression -> . CHAR_CONST
+    (19) Expression -> . FLOAT_CONST
+    (20) Expression -> . INT_CONST
+    (21) Expression -> . Expression / Expression
+    (22) Expression -> . Expression * Expression
+    (23) Expression -> . Expression - Expression
+    (24) Expression -> . Expression + Expression
+    (25) Expression -> . RETURN
+    (26) Expression -> . RETURN Expression
+    (27) Expression -> . PRINT ( STRING argumentos ) ;
+    (28) Expression -> . PRINT ( STRING ) ;
+    WHILE           shift and go to state 7
+    IF              shift and go to state 9
+    !               shift and go to state 10
+    (               shift and go to state 8
+    OBJECTID        shift and go to state 11
+    CHAR_CONST      shift and go to state 12
+    FLOAT_CONST     shift and go to state 13
+    INT_CONST       shift and go to state 14
+    RETURN          shift and go to state 15
+    PRINT           shift and go to state 16
+
+    Expression                     shift and go to state 80
+
+state 70
+
+    (39) Formal -> tipo . OBJECTID
+    OBJECTID        shift and go to state 81
+
+
+state 71
+
+    (36) Metodo -> tipo OBJECTID ( listaFormales . ) { bloque } ;
+    )               shift and go to state 82
+
+
+state 72
+
+    (37) Metodo -> tipo OBJECTID ( ) . { bloque } ;
+    {               shift and go to state 83
+
+
+state 73
+
+    (38) listaFormales -> Formal .
+    )               reduce using rule 38 (listaFormales -> Formal .)
+
+
+state 74
+
+    (35) Atributo -> tipo OBJECTID optAssign ; .
+    WHILE           reduce using rule 35 (Atributo -> tipo OBJECTID optAssign ; .)
+    IF              reduce using rule 35 (Atributo -> tipo OBJECTID optAssign ; .)
+    !               reduce using rule 35 (Atributo -> tipo OBJECTID optAssign ; .)
+    (               reduce using rule 35 (Atributo -> tipo OBJECTID optAssign ; .)
+    OBJECTID        reduce using rule 35 (Atributo -> tipo OBJECTID optAssign ; .)
+    CHAR_CONST      reduce using rule 35 (Atributo -> tipo OBJECTID optAssign ; .)
+    FLOAT_CONST     reduce using rule 35 (Atributo -> tipo OBJECTID optAssign ; .)
+    INT_CONST       reduce using rule 35 (Atributo -> tipo OBJECTID optAssign ; .)
+    RETURN          reduce using rule 35 (Atributo -> tipo OBJECTID optAssign ; .)
+    PRINT           reduce using rule 35 (Atributo -> tipo OBJECTID optAssign ; .)
+    VOID            reduce using rule 35 (Atributo -> tipo OBJECTID optAssign ; .)
+    CHAR            reduce using rule 35 (Atributo -> tipo OBJECTID optAssign ; .)
+    FLOAT           reduce using rule 35 (Atributo -> tipo OBJECTID optAssign ; .)
+    INT             reduce using rule 35 (Atributo -> tipo OBJECTID optAssign ; .)
+    $end            reduce using rule 35 (Atributo -> tipo OBJECTID optAssign ; .)
+
+
+state 75
+
+    (3) optAssign -> = Expression .
+    (8) Expression -> Expression . | | Expression
+    (9) Expression -> Expression . & & Expression
+    (11) Expression -> Expression . ! = Expression
+    (12) Expression -> Expression . = = Expression
+    (13) Expression -> Expression . > = Expression
+    (14) Expression -> Expression . < = Expression
+    (15) Expression -> Expression . < Expression
+    (21) Expression -> Expression . / Expression
+    (22) Expression -> Expression . * Expression
+    (23) Expression -> Expression . - Expression
+    (24) Expression -> Expression . + Expression
+    ;               reduce using rule 3 (optAssign -> = Expression .)
+    |               shift and go to state 24
+    &               shift and go to state 25
+    !               shift and go to state 26
+    =               shift and go to state 27
+    >               shift and go to state 28
+    <               shift and go to state 29
+    /               shift and go to state 30
+    *               shift and go to state 31
+    -               shift and go to state 32
+    +               shift and go to state 33
+
+
+state 76
+
+    (5) Expression -> WHILE ( Expression ) { . bloque }
+    (40) bloque -> . Expression ; bloque
+    (41) bloque -> . Expression ;
+    (5) Expression -> . WHILE ( Expression ) { bloque }
+    (6) Expression -> . IF ( Expression ) { bloque } Continuacion
+    (7) Expression -> . IF ( Expression ) { bloque }
+    (8) Expression -> . Expression | | Expression
+    (9) Expression -> . Expression & & Expression
+    (10) Expression -> . ! Expression
+    (11) Expression -> . Expression ! = Expression
+    (12) Expression -> . Expression = = Expression
+    (13) Expression -> . Expression > = Expression
+    (14) Expression -> . Expression < = Expression
+    (15) Expression -> . Expression < Expression
+    (16) Expression -> . ( Expression )
+    (17) Expression -> . OBJECTID
+    (18) Expression -> . CHAR_CONST
+    (19) Expression -> . FLOAT_CONST
+    (20) Expression -> . INT_CONST
+    (21) Expression -> . Expression / Expression
+    (22) Expression -> . Expression * Expression
+    (23) Expression -> . Expression - Expression
+    (24) Expression -> . Expression + Expression
+    (25) Expression -> . RETURN
+    (26) Expression -> . RETURN Expression
+    (27) Expression -> . PRINT ( STRING argumentos ) ;
+    (28) Expression -> . PRINT ( STRING ) ;
+    WHILE           shift and go to state 7
+    IF              shift and go to state 9
+    !               shift and go to state 10
+    (               shift and go to state 8
+    OBJECTID        shift and go to state 11
+    CHAR_CONST      shift and go to state 12
+    FLOAT_CONST     shift and go to state 13
+    INT_CONST       shift and go to state 14
+    RETURN          shift and go to state 15
+    PRINT           shift and go to state 16
+
+    Expression                     shift and go to state 84
+    bloque                         shift and go to state 85
+
+state 77
+
+    (6) Expression -> IF ( Expression ) { . bloque } Continuacion
+    (7) Expression -> IF ( Expression ) { . bloque }
+    (40) bloque -> . Expression ; bloque
+    (41) bloque -> . Expression ;
+    (5) Expression -> . WHILE ( Expression ) { bloque }
+    (6) Expression -> . IF ( Expression ) { bloque } Continuacion
+    (7) Expression -> . IF ( Expression ) { bloque }
+    (8) Expression -> . Expression | | Expression
+    (9) Expression -> . Expression & & Expression
+    (10) Expression -> . ! Expression
+    (11) Expression -> . Expression ! = Expression
+    (12) Expression -> . Expression = = Expression
+    (13) Expression -> . Expression > = Expression
+    (14) Expression -> . Expression < = Expression
+    (15) Expression -> . Expression < Expression
+    (16) Expression -> . ( Expression )
+    (17) Expression -> . OBJECTID
+    (18) Expression -> . CHAR_CONST
+    (19) Expression -> . FLOAT_CONST
+    (20) Expression -> . INT_CONST
+    (21) Expression -> . Expression / Expression
+    (22) Expression -> . Expression * Expression
+    (23) Expression -> . Expression - Expression
+    (24) Expression -> . Expression + Expression
+    (25) Expression -> . RETURN
+    (26) Expression -> . RETURN Expression
+    (27) Expression -> . PRINT ( STRING argumentos ) ;
+    (28) Expression -> . PRINT ( STRING ) ;
+    WHILE           shift and go to state 7
+    IF              shift and go to state 9
+    !               shift and go to state 10
+    (               shift and go to state 8
+    OBJECTID        shift and go to state 11
+    CHAR_CONST      shift and go to state 12
+    FLOAT_CONST     shift and go to state 13
+    INT_CONST       shift and go to state 14
+    RETURN          shift and go to state 15
+    PRINT           shift and go to state 16
+
+    Expression                     shift and go to state 84
+    bloque                         shift and go to state 86
+
+state 78
+
+    (27) Expression -> PRINT ( STRING argumentos ) . ;
+    ;               shift and go to state 87
+
+
+state 79
+
+    (28) Expression -> PRINT ( STRING ) ; .
+    |               reduce using rule 28 (Expression -> PRINT ( STRING ) ; .)
+    &               reduce using rule 28 (Expression -> PRINT ( STRING ) ; .)
+    !               reduce using rule 28 (Expression -> PRINT ( STRING ) ; .)
+    =               reduce using rule 28 (Expression -> PRINT ( STRING ) ; .)
+    >               reduce using rule 28 (Expression -> PRINT ( STRING ) ; .)
+    <               reduce using rule 28 (Expression -> PRINT ( STRING ) ; .)
+    /               reduce using rule 28 (Expression -> PRINT ( STRING ) ; .)
+    *               reduce using rule 28 (Expression -> PRINT ( STRING ) ; .)
+    -               reduce using rule 28 (Expression -> PRINT ( STRING ) ; .)
+    +               reduce using rule 28 (Expression -> PRINT ( STRING ) ; .)
+    WHILE           reduce using rule 28 (Expression -> PRINT ( STRING ) ; .)
+    IF              reduce using rule 28 (Expression -> PRINT ( STRING ) ; .)
+    (               reduce using rule 28 (Expression -> PRINT ( STRING ) ; .)
+    OBJECTID        reduce using rule 28 (Expression -> PRINT ( STRING ) ; .)
+    CHAR_CONST      reduce using rule 28 (Expression -> PRINT ( STRING ) ; .)
+    FLOAT_CONST     reduce using rule 28 (Expression -> PRINT ( STRING ) ; .)
+    INT_CONST       reduce using rule 28 (Expression -> PRINT ( STRING ) ; .)
+    RETURN          reduce using rule 28 (Expression -> PRINT ( STRING ) ; .)
+    PRINT           reduce using rule 28 (Expression -> PRINT ( STRING ) ; .)
+    VOID            reduce using rule 28 (Expression -> PRINT ( STRING ) ; .)
+    CHAR            reduce using rule 28 (Expression -> PRINT ( STRING ) ; .)
+    FLOAT           reduce using rule 28 (Expression -> PRINT ( STRING ) ; .)
+    INT             reduce using rule 28 (Expression -> PRINT ( STRING ) ; .)
+    $end            reduce using rule 28 (Expression -> PRINT ( STRING ) ; .)
+    )               reduce using rule 28 (Expression -> PRINT ( STRING ) ; .)
+    ;               reduce using rule 28 (Expression -> PRINT ( STRING ) ; .)
+    ,               reduce using rule 28 (Expression -> PRINT ( STRING ) ; .)
+
+
+state 80
+
+    (29) argumentos -> , Expression . argumentos
+    (30) argumentos -> , Expression .
+    (8) Expression -> Expression . | | Expression
+    (9) Expression -> Expression . & & Expression
+    (11) Expression -> Expression . ! = Expression
+    (12) Expression -> Expression . = = Expression
+    (13) Expression -> Expression . > = Expression
+    (14) Expression -> Expression . < = Expression
+    (15) Expression -> Expression . < Expression
+    (21) Expression -> Expression . / Expression
+    (22) Expression -> Expression . * Expression
+    (23) Expression -> Expression . - Expression
+    (24) Expression -> Expression . + Expression
+    (29) argumentos -> . , Expression argumentos
+    (30) argumentos -> . , Expression
+    )               reduce using rule 30 (argumentos -> , Expression .)
+    |               shift and go to state 24
+    &               shift and go to state 25
+    !               shift and go to state 26
+    =               shift and go to state 27
+    >               shift and go to state 28
+    <               shift and go to state 29
+    /               shift and go to state 30
+    *               shift and go to state 31
+    -               shift and go to state 32
+    +               shift and go to state 33
+    ,               shift and go to state 69
+
+    argumentos                     shift and go to state 88
+
+state 81
+
+    (39) Formal -> tipo OBJECTID .
+    )               reduce using rule 39 (Formal -> tipo OBJECTID .)
+
+
+state 82
+
+    (36) Metodo -> tipo OBJECTID ( listaFormales ) . { bloque } ;
+    {               shift and go to state 89
+
+
+state 83
+
+    (37) Metodo -> tipo OBJECTID ( ) { . bloque } ;
+    (40) bloque -> . Expression ; bloque
+    (41) bloque -> . Expression ;
+    (5) Expression -> . WHILE ( Expression ) { bloque }
+    (6) Expression -> . IF ( Expression ) { bloque } Continuacion
+    (7) Expression -> . IF ( Expression ) { bloque }
+    (8) Expression -> . Expression | | Expression
+    (9) Expression -> . Expression & & Expression
+    (10) Expression -> . ! Expression
+    (11) Expression -> . Expression ! = Expression
+    (12) Expression -> . Expression = = Expression
+    (13) Expression -> . Expression > = Expression
+    (14) Expression -> . Expression < = Expression
+    (15) Expression -> . Expression < Expression
+    (16) Expression -> . ( Expression )
+    (17) Expression -> . OBJECTID
+    (18) Expression -> . CHAR_CONST
+    (19) Expression -> . FLOAT_CONST
+    (20) Expression -> . INT_CONST
+    (21) Expression -> . Expression / Expression
+    (22) Expression -> . Expression * Expression
+    (23) Expression -> . Expression - Expression
+    (24) Expression -> . Expression + Expression
+    (25) Expression -> . RETURN
+    (26) Expression -> . RETURN Expression
+    (27) Expression -> . PRINT ( STRING argumentos ) ;
+    (28) Expression -> . PRINT ( STRING ) ;
+    WHILE           shift and go to state 7
+    IF              shift and go to state 9
+    !               shift and go to state 10
+    (               shift and go to state 8
+    OBJECTID        shift and go to state 11
+    CHAR_CONST      shift and go to state 12
+    FLOAT_CONST     shift and go to state 13
+    INT_CONST       shift and go to state 14
+    RETURN          shift and go to state 15
+    PRINT           shift and go to state 16
+
+    bloque                         shift and go to state 90
+    Expression                     shift and go to state 84
+
+state 84
+
+    (40) bloque -> Expression . ; bloque
+    (41) bloque -> Expression . ;
+    (8) Expression -> Expression . | | Expression
+    (9) Expression -> Expression . & & Expression
+    (11) Expression -> Expression . ! = Expression
+    (12) Expression -> Expression . = = Expression
+    (13) Expression -> Expression . > = Expression
+    (14) Expression -> Expression . < = Expression
+    (15) Expression -> Expression . < Expression
+    (21) Expression -> Expression . / Expression
+    (22) Expression -> Expression . * Expression
+    (23) Expression -> Expression . - Expression
+    (24) Expression -> Expression . + Expression
+    ;               shift and go to state 91
+    |               shift and go to state 24
+    &               shift and go to state 25
+    !               shift and go to state 26
+    =               shift and go to state 27
+    >               shift and go to state 28
+    <               shift and go to state 29
+    /               shift and go to state 30
+    *               shift and go to state 31
+    -               shift and go to state 32
+    +               shift and go to state 33
+
+
+state 85
+
+    (5) Expression -> WHILE ( Expression ) { bloque . }
+    }               shift and go to state 92
+
+
+state 86
+
+    (6) Expression -> IF ( Expression ) { bloque . } Continuacion
+    (7) Expression -> IF ( Expression ) { bloque . }
+    }               shift and go to state 93
+
+
+state 87
+
+    (27) Expression -> PRINT ( STRING argumentos ) ; .
+    |               reduce using rule 27 (Expression -> PRINT ( STRING argumentos ) ; .)
+    &               reduce using rule 27 (Expression -> PRINT ( STRING argumentos ) ; .)
+    !               reduce using rule 27 (Expression -> PRINT ( STRING argumentos ) ; .)
+    =               reduce using rule 27 (Expression -> PRINT ( STRING argumentos ) ; .)
+    >               reduce using rule 27 (Expression -> PRINT ( STRING argumentos ) ; .)
+    <               reduce using rule 27 (Expression -> PRINT ( STRING argumentos ) ; .)
+    /               reduce using rule 27 (Expression -> PRINT ( STRING argumentos ) ; .)
+    *               reduce using rule 27 (Expression -> PRINT ( STRING argumentos ) ; .)
+    -               reduce using rule 27 (Expression -> PRINT ( STRING argumentos ) ; .)
+    +               reduce using rule 27 (Expression -> PRINT ( STRING argumentos ) ; .)
+    WHILE           reduce using rule 27 (Expression -> PRINT ( STRING argumentos ) ; .)
+    IF              reduce using rule 27 (Expression -> PRINT ( STRING argumentos ) ; .)
+    (               reduce using rule 27 (Expression -> PRINT ( STRING argumentos ) ; .)
+    OBJECTID        reduce using rule 27 (Expression -> PRINT ( STRING argumentos ) ; .)
+    CHAR_CONST      reduce using rule 27 (Expression -> PRINT ( STRING argumentos ) ; .)
+    FLOAT_CONST     reduce using rule 27 (Expression -> PRINT ( STRING argumentos ) ; .)
+    INT_CONST       reduce using rule 27 (Expression -> PRINT ( STRING argumentos ) ; .)
+    RETURN          reduce using rule 27 (Expression -> PRINT ( STRING argumentos ) ; .)
+    PRINT           reduce using rule 27 (Expression -> PRINT ( STRING argumentos ) ; .)
+    VOID            reduce using rule 27 (Expression -> PRINT ( STRING argumentos ) ; .)
+    CHAR            reduce using rule 27 (Expression -> PRINT ( STRING argumentos ) ; .)
+    FLOAT           reduce using rule 27 (Expression -> PRINT ( STRING argumentos ) ; .)
+    INT             reduce using rule 27 (Expression -> PRINT ( STRING argumentos ) ; .)
+    $end            reduce using rule 27 (Expression -> PRINT ( STRING argumentos ) ; .)
+    )               reduce using rule 27 (Expression -> PRINT ( STRING argumentos ) ; .)
+    ;               reduce using rule 27 (Expression -> PRINT ( STRING argumentos ) ; .)
+    ,               reduce using rule 27 (Expression -> PRINT ( STRING argumentos ) ; .)
+
+
+state 88
+
+    (29) argumentos -> , Expression argumentos .
+    )               reduce using rule 29 (argumentos -> , Expression argumentos .)
+
+
+state 89
+
+    (36) Metodo -> tipo OBJECTID ( listaFormales ) { . bloque } ;
+    (40) bloque -> . Expression ; bloque
+    (41) bloque -> . Expression ;
+    (5) Expression -> . WHILE ( Expression ) { bloque }
+    (6) Expression -> . IF ( Expression ) { bloque } Continuacion
+    (7) Expression -> . IF ( Expression ) { bloque }
+    (8) Expression -> . Expression | | Expression
+    (9) Expression -> . Expression & & Expression
+    (10) Expression -> . ! Expression
+    (11) Expression -> . Expression ! = Expression
+    (12) Expression -> . Expression = = Expression
+    (13) Expression -> . Expression > = Expression
+    (14) Expression -> . Expression < = Expression
+    (15) Expression -> . Expression < Expression
+    (16) Expression -> . ( Expression )
+    (17) Expression -> . OBJECTID
+    (18) Expression -> . CHAR_CONST
+    (19) Expression -> . FLOAT_CONST
+    (20) Expression -> . INT_CONST
+    (21) Expression -> . Expression / Expression
+    (22) Expression -> . Expression * Expression
+    (23) Expression -> . Expression - Expression
+    (24) Expression -> . Expression + Expression
+    (25) Expression -> . RETURN
+    (26) Expression -> . RETURN Expression
+    (27) Expression -> . PRINT ( STRING argumentos ) ;
+    (28) Expression -> . PRINT ( STRING ) ;
+    WHILE           shift and go to state 7
+    IF              shift and go to state 9
+    !               shift and go to state 10
+    (               shift and go to state 8
+    OBJECTID        shift and go to state 11
+    CHAR_CONST      shift and go to state 12
+    FLOAT_CONST     shift and go to state 13
+    INT_CONST       shift and go to state 14
+    RETURN          shift and go to state 15
+    PRINT           shift and go to state 16
+
+    bloque                         shift and go to state 94
+    Expression                     shift and go to state 84
+
+state 90
+
+    (37) Metodo -> tipo OBJECTID ( ) { bloque . } ;
+    }               shift and go to state 95
+
+
+state 91
+
+    (40) bloque -> Expression ; . bloque
+    (41) bloque -> Expression ; .
+    (40) bloque -> . Expression ; bloque
+    (41) bloque -> . Expression ;
+    (5) Expression -> . WHILE ( Expression ) { bloque }
+    (6) Expression -> . IF ( Expression ) { bloque } Continuacion
+    (7) Expression -> . IF ( Expression ) { bloque }
+    (8) Expression -> . Expression | | Expression
+    (9) Expression -> . Expression & & Expression
+    (10) Expression -> . ! Expression
+    (11) Expression -> . Expression ! = Expression
+    (12) Expression -> . Expression = = Expression
+    (13) Expression -> . Expression > = Expression
+    (14) Expression -> . Expression < = Expression
+    (15) Expression -> . Expression < Expression
+    (16) Expression -> . ( Expression )
+    (17) Expression -> . OBJECTID
+    (18) Expression -> . CHAR_CONST
+    (19) Expression -> . FLOAT_CONST
+    (20) Expression -> . INT_CONST
+    (21) Expression -> . Expression / Expression
+    (22) Expression -> . Expression * Expression
+    (23) Expression -> . Expression - Expression
+    (24) Expression -> . Expression + Expression
+    (25) Expression -> . RETURN
+    (26) Expression -> . RETURN Expression
+    (27) Expression -> . PRINT ( STRING argumentos ) ;
+    (28) Expression -> . PRINT ( STRING ) ;
+    }               reduce using rule 41 (bloque -> Expression ; .)
+    WHILE           shift and go to state 7
+    IF              shift and go to state 9
+    !               shift and go to state 10
+    (               shift and go to state 8
+    OBJECTID        shift and go to state 11
+    CHAR_CONST      shift and go to state 12
+    FLOAT_CONST     shift and go to state 13
+    INT_CONST       shift and go to state 14
+    RETURN          shift and go to state 15
+    PRINT           shift and go to state 16
+
+    Expression                     shift and go to state 84
+    bloque                         shift and go to state 96
+
+state 92
+
+    (5) Expression -> WHILE ( Expression ) { bloque } .
+    |               reduce using rule 5 (Expression -> WHILE ( Expression ) { bloque } .)
+    &               reduce using rule 5 (Expression -> WHILE ( Expression ) { bloque } .)
+    !               reduce using rule 5 (Expression -> WHILE ( Expression ) { bloque } .)
+    =               reduce using rule 5 (Expression -> WHILE ( Expression ) { bloque } .)
+    >               reduce using rule 5 (Expression -> WHILE ( Expression ) { bloque } .)
+    <               reduce using rule 5 (Expression -> WHILE ( Expression ) { bloque } .)
+    /               reduce using rule 5 (Expression -> WHILE ( Expression ) { bloque } .)
+    *               reduce using rule 5 (Expression -> WHILE ( Expression ) { bloque } .)
+    -               reduce using rule 5 (Expression -> WHILE ( Expression ) { bloque } .)
+    +               reduce using rule 5 (Expression -> WHILE ( Expression ) { bloque } .)
+    WHILE           reduce using rule 5 (Expression -> WHILE ( Expression ) { bloque } .)
+    IF              reduce using rule 5 (Expression -> WHILE ( Expression ) { bloque } .)
+    (               reduce using rule 5 (Expression -> WHILE ( Expression ) { bloque } .)
+    OBJECTID        reduce using rule 5 (Expression -> WHILE ( Expression ) { bloque } .)
+    CHAR_CONST      reduce using rule 5 (Expression -> WHILE ( Expression ) { bloque } .)
+    FLOAT_CONST     reduce using rule 5 (Expression -> WHILE ( Expression ) { bloque } .)
+    INT_CONST       reduce using rule 5 (Expression -> WHILE ( Expression ) { bloque } .)
+    RETURN          reduce using rule 5 (Expression -> WHILE ( Expression ) { bloque } .)
+    PRINT           reduce using rule 5 (Expression -> WHILE ( Expression ) { bloque } .)
+    VOID            reduce using rule 5 (Expression -> WHILE ( Expression ) { bloque } .)
+    CHAR            reduce using rule 5 (Expression -> WHILE ( Expression ) { bloque } .)
+    FLOAT           reduce using rule 5 (Expression -> WHILE ( Expression ) { bloque } .)
+    INT             reduce using rule 5 (Expression -> WHILE ( Expression ) { bloque } .)
+    $end            reduce using rule 5 (Expression -> WHILE ( Expression ) { bloque } .)
+    )               reduce using rule 5 (Expression -> WHILE ( Expression ) { bloque } .)
+    ;               reduce using rule 5 (Expression -> WHILE ( Expression ) { bloque } .)
+    ,               reduce using rule 5 (Expression -> WHILE ( Expression ) { bloque } .)
+
+
+state 93
+
+    (6) Expression -> IF ( Expression ) { bloque } . Continuacion
+    (7) Expression -> IF ( Expression ) { bloque } .
+    (42) Continuacion -> . ELSE IF ( Expression ) { bloque }
+    (43) Continuacion -> . ELSE IF ( Expression ) { bloque } Continuacion
+    (44) Continuacion -> . ELSE { bloque }
+    |               reduce using rule 7 (Expression -> IF ( Expression ) { bloque } .)
+    &               reduce using rule 7 (Expression -> IF ( Expression ) { bloque } .)
+    !               reduce using rule 7 (Expression -> IF ( Expression ) { bloque } .)
+    =               reduce using rule 7 (Expression -> IF ( Expression ) { bloque } .)
+    >               reduce using rule 7 (Expression -> IF ( Expression ) { bloque } .)
+    <               reduce using rule 7 (Expression -> IF ( Expression ) { bloque } .)
+    /               reduce using rule 7 (Expression -> IF ( Expression ) { bloque } .)
+    *               reduce using rule 7 (Expression -> IF ( Expression ) { bloque } .)
+    -               reduce using rule 7 (Expression -> IF ( Expression ) { bloque } .)
+    +               reduce using rule 7 (Expression -> IF ( Expression ) { bloque } .)
+    WHILE           reduce using rule 7 (Expression -> IF ( Expression ) { bloque } .)
+    IF              reduce using rule 7 (Expression -> IF ( Expression ) { bloque } .)
+    (               reduce using rule 7 (Expression -> IF ( Expression ) { bloque } .)
+    OBJECTID        reduce using rule 7 (Expression -> IF ( Expression ) { bloque } .)
+    CHAR_CONST      reduce using rule 7 (Expression -> IF ( Expression ) { bloque } .)
+    FLOAT_CONST     reduce using rule 7 (Expression -> IF ( Expression ) { bloque } .)
+    INT_CONST       reduce using rule 7 (Expression -> IF ( Expression ) { bloque } .)
+    RETURN          reduce using rule 7 (Expression -> IF ( Expression ) { bloque } .)
+    PRINT           reduce using rule 7 (Expression -> IF ( Expression ) { bloque } .)
+    VOID            reduce using rule 7 (Expression -> IF ( Expression ) { bloque } .)
+    CHAR            reduce using rule 7 (Expression -> IF ( Expression ) { bloque } .)
+    FLOAT           reduce using rule 7 (Expression -> IF ( Expression ) { bloque } .)
+    INT             reduce using rule 7 (Expression -> IF ( Expression ) { bloque } .)
+    $end            reduce using rule 7 (Expression -> IF ( Expression ) { bloque } .)
+    )               reduce using rule 7 (Expression -> IF ( Expression ) { bloque } .)
+    ;               reduce using rule 7 (Expression -> IF ( Expression ) { bloque } .)
+    ,               reduce using rule 7 (Expression -> IF ( Expression ) { bloque } .)
+    ELSE            shift and go to state 98
+
+    Continuacion                   shift and go to state 97
+
+state 94
+
+    (36) Metodo -> tipo OBJECTID ( listaFormales ) { bloque . } ;
+    }               shift and go to state 99
+
+
+state 95
+
+    (37) Metodo -> tipo OBJECTID ( ) { bloque } . ;
+    ;               shift and go to state 100
+
+
+state 96
+
+    (40) bloque -> Expression ; bloque .
+    }               reduce using rule 40 (bloque -> Expression ; bloque .)
+
+
+state 97
+
+    (6) Expression -> IF ( Expression ) { bloque } Continuacion .
+    |               reduce using rule 6 (Expression -> IF ( Expression ) { bloque } Continuacion .)
+    &               reduce using rule 6 (Expression -> IF ( Expression ) { bloque } Continuacion .)
+    !               reduce using rule 6 (Expression -> IF ( Expression ) { bloque } Continuacion .)
+    =               reduce using rule 6 (Expression -> IF ( Expression ) { bloque } Continuacion .)
+    >               reduce using rule 6 (Expression -> IF ( Expression ) { bloque } Continuacion .)
+    <               reduce using rule 6 (Expression -> IF ( Expression ) { bloque } Continuacion .)
+    /               reduce using rule 6 (Expression -> IF ( Expression ) { bloque } Continuacion .)
+    *               reduce using rule 6 (Expression -> IF ( Expression ) { bloque } Continuacion .)
+    -               reduce using rule 6 (Expression -> IF ( Expression ) { bloque } Continuacion .)
+    +               reduce using rule 6 (Expression -> IF ( Expression ) { bloque } Continuacion .)
+    WHILE           reduce using rule 6 (Expression -> IF ( Expression ) { bloque } Continuacion .)
+    IF              reduce using rule 6 (Expression -> IF ( Expression ) { bloque } Continuacion .)
+    (               reduce using rule 6 (Expression -> IF ( Expression ) { bloque } Continuacion .)
+    OBJECTID        reduce using rule 6 (Expression -> IF ( Expression ) { bloque } Continuacion .)
+    CHAR_CONST      reduce using rule 6 (Expression -> IF ( Expression ) { bloque } Continuacion .)
+    FLOAT_CONST     reduce using rule 6 (Expression -> IF ( Expression ) { bloque } Continuacion .)
+    INT_CONST       reduce using rule 6 (Expression -> IF ( Expression ) { bloque } Continuacion .)
+    RETURN          reduce using rule 6 (Expression -> IF ( Expression ) { bloque } Continuacion .)
+    PRINT           reduce using rule 6 (Expression -> IF ( Expression ) { bloque } Continuacion .)
+    VOID            reduce using rule 6 (Expression -> IF ( Expression ) { bloque } Continuacion .)
+    CHAR            reduce using rule 6 (Expression -> IF ( Expression ) { bloque } Continuacion .)
+    FLOAT           reduce using rule 6 (Expression -> IF ( Expression ) { bloque } Continuacion .)
+    INT             reduce using rule 6 (Expression -> IF ( Expression ) { bloque } Continuacion .)
+    $end            reduce using rule 6 (Expression -> IF ( Expression ) { bloque } Continuacion .)
+    )               reduce using rule 6 (Expression -> IF ( Expression ) { bloque } Continuacion .)
+    ;               reduce using rule 6 (Expression -> IF ( Expression ) { bloque } Continuacion .)
+    ,               reduce using rule 6 (Expression -> IF ( Expression ) { bloque } Continuacion .)
+
+
+state 98
+
+    (42) Continuacion -> ELSE . IF ( Expression ) { bloque }
+    (43) Continuacion -> ELSE . IF ( Expression ) { bloque } Continuacion
+    (44) Continuacion -> ELSE . { bloque }
+    IF              shift and go to state 101
+    {               shift and go to state 102
+
+
+state 99
+
+    (36) Metodo -> tipo OBJECTID ( listaFormales ) { bloque } . ;
+    ;               shift and go to state 103
+
+
+state 100
+
+    (37) Metodo -> tipo OBJECTID ( ) { bloque } ; .
+    WHILE           reduce using rule 37 (Metodo -> tipo OBJECTID ( ) { bloque } ; .)
+    IF              reduce using rule 37 (Metodo -> tipo OBJECTID ( ) { bloque } ; .)
+    !               reduce using rule 37 (Metodo -> tipo OBJECTID ( ) { bloque } ; .)
+    (               reduce using rule 37 (Metodo -> tipo OBJECTID ( ) { bloque } ; .)
+    OBJECTID        reduce using rule 37 (Metodo -> tipo OBJECTID ( ) { bloque } ; .)
+    CHAR_CONST      reduce using rule 37 (Metodo -> tipo OBJECTID ( ) { bloque } ; .)
+    FLOAT_CONST     reduce using rule 37 (Metodo -> tipo OBJECTID ( ) { bloque } ; .)
+    INT_CONST       reduce using rule 37 (Metodo -> tipo OBJECTID ( ) { bloque } ; .)
+    RETURN          reduce using rule 37 (Metodo -> tipo OBJECTID ( ) { bloque } ; .)
+    PRINT           reduce using rule 37 (Metodo -> tipo OBJECTID ( ) { bloque } ; .)
+    VOID            reduce using rule 37 (Metodo -> tipo OBJECTID ( ) { bloque } ; .)
+    CHAR            reduce using rule 37 (Metodo -> tipo OBJECTID ( ) { bloque } ; .)
+    FLOAT           reduce using rule 37 (Metodo -> tipo OBJECTID ( ) { bloque } ; .)
+    INT             reduce using rule 37 (Metodo -> tipo OBJECTID ( ) { bloque } ; .)
+    $end            reduce using rule 37 (Metodo -> tipo OBJECTID ( ) { bloque } ; .)
+
+
+state 101
+
+    (42) Continuacion -> ELSE IF . ( Expression ) { bloque }
+    (43) Continuacion -> ELSE IF . ( Expression ) { bloque } Continuacion
+    (               shift and go to state 104
+
+
+state 102
+
+    (44) Continuacion -> ELSE { . bloque }
+    (40) bloque -> . Expression ; bloque
+    (41) bloque -> . Expression ;
+    (5) Expression -> . WHILE ( Expression ) { bloque }
+    (6) Expression -> . IF ( Expression ) { bloque } Continuacion
+    (7) Expression -> . IF ( Expression ) { bloque }
+    (8) Expression -> . Expression | | Expression
+    (9) Expression -> . Expression & & Expression
+    (10) Expression -> . ! Expression
+    (11) Expression -> . Expression ! = Expression
+    (12) Expression -> . Expression = = Expression
+    (13) Expression -> . Expression > = Expression
+    (14) Expression -> . Expression < = Expression
+    (15) Expression -> . Expression < Expression
+    (16) Expression -> . ( Expression )
+    (17) Expression -> . OBJECTID
+    (18) Expression -> . CHAR_CONST
+    (19) Expression -> . FLOAT_CONST
+    (20) Expression -> . INT_CONST
+    (21) Expression -> . Expression / Expression
+    (22) Expression -> . Expression * Expression
+    (23) Expression -> . Expression - Expression
+    (24) Expression -> . Expression + Expression
+    (25) Expression -> . RETURN
+    (26) Expression -> . RETURN Expression
+    (27) Expression -> . PRINT ( STRING argumentos ) ;
+    (28) Expression -> . PRINT ( STRING ) ;
+    WHILE           shift and go to state 7
+    IF              shift and go to state 9
+    !               shift and go to state 10
+    (               shift and go to state 8
+    OBJECTID        shift and go to state 11
+    CHAR_CONST      shift and go to state 12
+    FLOAT_CONST     shift and go to state 13
+    INT_CONST       shift and go to state 14
+    RETURN          shift and go to state 15
+    PRINT           shift and go to state 16
+
+    bloque                         shift and go to state 105
+    Expression                     shift and go to state 84
+
+state 103
+
+    (36) Metodo -> tipo OBJECTID ( listaFormales ) { bloque } ; .
+    WHILE           reduce using rule 36 (Metodo -> tipo OBJECTID ( listaFormales ) { bloque } ; .)
+    IF              reduce using rule 36 (Metodo -> tipo OBJECTID ( listaFormales ) { bloque } ; .)
+    !               reduce using rule 36 (Metodo -> tipo OBJECTID ( listaFormales ) { bloque } ; .)
+    (               reduce using rule 36 (Metodo -> tipo OBJECTID ( listaFormales ) { bloque } ; .)
+    OBJECTID        reduce using rule 36 (Metodo -> tipo OBJECTID ( listaFormales ) { bloque } ; .)
+    CHAR_CONST      reduce using rule 36 (Metodo -> tipo OBJECTID ( listaFormales ) { bloque } ; .)
+    FLOAT_CONST     reduce using rule 36 (Metodo -> tipo OBJECTID ( listaFormales ) { bloque } ; .)
+    INT_CONST       reduce using rule 36 (Metodo -> tipo OBJECTID ( listaFormales ) { bloque } ; .)
+    RETURN          reduce using rule 36 (Metodo -> tipo OBJECTID ( listaFormales ) { bloque } ; .)
+    PRINT           reduce using rule 36 (Metodo -> tipo OBJECTID ( listaFormales ) { bloque } ; .)
+    VOID            reduce using rule 36 (Metodo -> tipo OBJECTID ( listaFormales ) { bloque } ; .)
+    CHAR            reduce using rule 36 (Metodo -> tipo OBJECTID ( listaFormales ) { bloque } ; .)
+    FLOAT           reduce using rule 36 (Metodo -> tipo OBJECTID ( listaFormales ) { bloque } ; .)
+    INT             reduce using rule 36 (Metodo -> tipo OBJECTID ( listaFormales ) { bloque } ; .)
+    $end            reduce using rule 36 (Metodo -> tipo OBJECTID ( listaFormales ) { bloque } ; .)
+
+
+state 104
+
+    (42) Continuacion -> ELSE IF ( . Expression ) { bloque }
+    (43) Continuacion -> ELSE IF ( . Expression ) { bloque } Continuacion
+    (5) Expression -> . WHILE ( Expression ) { bloque }
+    (6) Expression -> . IF ( Expression ) { bloque } Continuacion
+    (7) Expression -> . IF ( Expression ) { bloque }
+    (8) Expression -> . Expression | | Expression
+    (9) Expression -> . Expression & & Expression
+    (10) Expression -> . ! Expression
+    (11) Expression -> . Expression ! = Expression
+    (12) Expression -> . Expression = = Expression
+    (13) Expression -> . Expression > = Expression
+    (14) Expression -> . Expression < = Expression
+    (15) Expression -> . Expression < Expression
+    (16) Expression -> . ( Expression )
+    (17) Expression -> . OBJECTID
+    (18) Expression -> . CHAR_CONST
+    (19) Expression -> . FLOAT_CONST
+    (20) Expression -> . INT_CONST
+    (21) Expression -> . Expression / Expression
+    (22) Expression -> . Expression * Expression
+    (23) Expression -> . Expression - Expression
+    (24) Expression -> . Expression + Expression
+    (25) Expression -> . RETURN
+    (26) Expression -> . RETURN Expression
+    (27) Expression -> . PRINT ( STRING argumentos ) ;
+    (28) Expression -> . PRINT ( STRING ) ;
+    WHILE           shift and go to state 7
+    IF              shift and go to state 9
+    !               shift and go to state 10
+    (               shift and go to state 8
+    OBJECTID        shift and go to state 11
+    CHAR_CONST      shift and go to state 12
+    FLOAT_CONST     shift and go to state 13
+    INT_CONST       shift and go to state 14
+    RETURN          shift and go to state 15
+    PRINT           shift and go to state 16
+
+    Expression                     shift and go to state 106
+
+state 105
+
+    (44) Continuacion -> ELSE { bloque . }
+    }               shift and go to state 107
+
+
+state 106
+
+    (42) Continuacion -> ELSE IF ( Expression . ) { bloque }
+    (43) Continuacion -> ELSE IF ( Expression . ) { bloque } Continuacion
+    (8) Expression -> Expression . | | Expression
+    (9) Expression -> Expression . & & Expression
+    (11) Expression -> Expression . ! = Expression
+    (12) Expression -> Expression . = = Expression
+    (13) Expression -> Expression . > = Expression
+    (14) Expression -> Expression . < = Expression
+    (15) Expression -> Expression . < Expression
+    (21) Expression -> Expression . / Expression
+    (22) Expression -> Expression . * Expression
+    (23) Expression -> Expression . - Expression
+    (24) Expression -> Expression . + Expression
+    )               shift and go to state 108
+    |               shift and go to state 24
+    &               shift and go to state 25
+    !               shift and go to state 26
+    =               shift and go to state 27
+    >               shift and go to state 28
+    <               shift and go to state 29
+    /               shift and go to state 30
+    *               shift and go to state 31
+    -               shift and go to state 32
+    +               shift and go to state 33
+
+
+state 107
+
+    (44) Continuacion -> ELSE { bloque } .
+    |               reduce using rule 44 (Continuacion -> ELSE { bloque } .)
+    &               reduce using rule 44 (Continuacion -> ELSE { bloque } .)
+    !               reduce using rule 44 (Continuacion -> ELSE { bloque } .)
+    =               reduce using rule 44 (Continuacion -> ELSE { bloque } .)
+    >               reduce using rule 44 (Continuacion -> ELSE { bloque } .)
+    <               reduce using rule 44 (Continuacion -> ELSE { bloque } .)
+    /               reduce using rule 44 (Continuacion -> ELSE { bloque } .)
+    *               reduce using rule 44 (Continuacion -> ELSE { bloque } .)
+    -               reduce using rule 44 (Continuacion -> ELSE { bloque } .)
+    +               reduce using rule 44 (Continuacion -> ELSE { bloque } .)
+    WHILE           reduce using rule 44 (Continuacion -> ELSE { bloque } .)
+    IF              reduce using rule 44 (Continuacion -> ELSE { bloque } .)
+    (               reduce using rule 44 (Continuacion -> ELSE { bloque } .)
+    OBJECTID        reduce using rule 44 (Continuacion -> ELSE { bloque } .)
+    CHAR_CONST      reduce using rule 44 (Continuacion -> ELSE { bloque } .)
+    FLOAT_CONST     reduce using rule 44 (Continuacion -> ELSE { bloque } .)
+    INT_CONST       reduce using rule 44 (Continuacion -> ELSE { bloque } .)
+    RETURN          reduce using rule 44 (Continuacion -> ELSE { bloque } .)
+    PRINT           reduce using rule 44 (Continuacion -> ELSE { bloque } .)
+    VOID            reduce using rule 44 (Continuacion -> ELSE { bloque } .)
+    CHAR            reduce using rule 44 (Continuacion -> ELSE { bloque } .)
+    FLOAT           reduce using rule 44 (Continuacion -> ELSE { bloque } .)
+    INT             reduce using rule 44 (Continuacion -> ELSE { bloque } .)
+    $end            reduce using rule 44 (Continuacion -> ELSE { bloque } .)
+    )               reduce using rule 44 (Continuacion -> ELSE { bloque } .)
+    ;               reduce using rule 44 (Continuacion -> ELSE { bloque } .)
+    ,               reduce using rule 44 (Continuacion -> ELSE { bloque } .)
+
+
+state 108
+
+    (42) Continuacion -> ELSE IF ( Expression ) . { bloque }
+    (43) Continuacion -> ELSE IF ( Expression ) . { bloque } Continuacion
+    {               shift and go to state 109
+
+
+state 109
+
+    (42) Continuacion -> ELSE IF ( Expression ) { . bloque }
+    (43) Continuacion -> ELSE IF ( Expression ) { . bloque } Continuacion
+    (40) bloque -> . Expression ; bloque
+    (41) bloque -> . Expression ;
+    (5) Expression -> . WHILE ( Expression ) { bloque }
+    (6) Expression -> . IF ( Expression ) { bloque } Continuacion
+    (7) Expression -> . IF ( Expression ) { bloque }
+    (8) Expression -> . Expression | | Expression
+    (9) Expression -> . Expression & & Expression
+    (10) Expression -> . ! Expression
+    (11) Expression -> . Expression ! = Expression
+    (12) Expression -> . Expression = = Expression
+    (13) Expression -> . Expression > = Expression
+    (14) Expression -> . Expression < = Expression
+    (15) Expression -> . Expression < Expression
+    (16) Expression -> . ( Expression )
+    (17) Expression -> . OBJECTID
+    (18) Expression -> . CHAR_CONST
+    (19) Expression -> . FLOAT_CONST
+    (20) Expression -> . INT_CONST
+    (21) Expression -> . Expression / Expression
+    (22) Expression -> . Expression * Expression
+    (23) Expression -> . Expression - Expression
+    (24) Expression -> . Expression + Expression
+    (25) Expression -> . RETURN
+    (26) Expression -> . RETURN Expression
+    (27) Expression -> . PRINT ( STRING argumentos ) ;
+    (28) Expression -> . PRINT ( STRING ) ;
+    WHILE           shift and go to state 7
+    IF              shift and go to state 9
+    !               shift and go to state 10
+    (               shift and go to state 8
+    OBJECTID        shift and go to state 11
+    CHAR_CONST      shift and go to state 12
+    FLOAT_CONST     shift and go to state 13
+    INT_CONST       shift and go to state 14
+    RETURN          shift and go to state 15
+    PRINT           shift and go to state 16
+
+    Expression                     shift and go to state 84
+    bloque                         shift and go to state 110
+
+state 110
+
+    (42) Continuacion -> ELSE IF ( Expression ) { bloque . }
+    (43) Continuacion -> ELSE IF ( Expression ) { bloque . } Continuacion
+    }               shift and go to state 111
+
+
+state 111
+
+    (42) Continuacion -> ELSE IF ( Expression ) { bloque } .
+    (43) Continuacion -> ELSE IF ( Expression ) { bloque } . Continuacion
+    (42) Continuacion -> . ELSE IF ( Expression ) { bloque }
+    (43) Continuacion -> . ELSE IF ( Expression ) { bloque } Continuacion
+    (44) Continuacion -> . ELSE { bloque }
+    |               reduce using rule 42 (Continuacion -> ELSE IF ( Expression ) { bloque } .)
+    &               reduce using rule 42 (Continuacion -> ELSE IF ( Expression ) { bloque } .)
+    !               reduce using rule 42 (Continuacion -> ELSE IF ( Expression ) { bloque } .)
+    =               reduce using rule 42 (Continuacion -> ELSE IF ( Expression ) { bloque } .)
+    >               reduce using rule 42 (Continuacion -> ELSE IF ( Expression ) { bloque } .)
+    <               reduce using rule 42 (Continuacion -> ELSE IF ( Expression ) { bloque } .)
+    /               reduce using rule 42 (Continuacion -> ELSE IF ( Expression ) { bloque } .)
+    *               reduce using rule 42 (Continuacion -> ELSE IF ( Expression ) { bloque } .)
+    -               reduce using rule 42 (Continuacion -> ELSE IF ( Expression ) { bloque } .)
+    +               reduce using rule 42 (Continuacion -> ELSE IF ( Expression ) { bloque } .)
+    WHILE           reduce using rule 42 (Continuacion -> ELSE IF ( Expression ) { bloque } .)
+    IF              reduce using rule 42 (Continuacion -> ELSE IF ( Expression ) { bloque } .)
+    (               reduce using rule 42 (Continuacion -> ELSE IF ( Expression ) { bloque } .)
+    OBJECTID        reduce using rule 42 (Continuacion -> ELSE IF ( Expression ) { bloque } .)
+    CHAR_CONST      reduce using rule 42 (Continuacion -> ELSE IF ( Expression ) { bloque } .)
+    FLOAT_CONST     reduce using rule 42 (Continuacion -> ELSE IF ( Expression ) { bloque } .)
+    INT_CONST       reduce using rule 42 (Continuacion -> ELSE IF ( Expression ) { bloque } .)
+    RETURN          reduce using rule 42 (Continuacion -> ELSE IF ( Expression ) { bloque } .)
+    PRINT           reduce using rule 42 (Continuacion -> ELSE IF ( Expression ) { bloque } .)
+    VOID            reduce using rule 42 (Continuacion -> ELSE IF ( Expression ) { bloque } .)
+    CHAR            reduce using rule 42 (Continuacion -> ELSE IF ( Expression ) { bloque } .)
+    FLOAT           reduce using rule 42 (Continuacion -> ELSE IF ( Expression ) { bloque } .)
+    INT             reduce using rule 42 (Continuacion -> ELSE IF ( Expression ) { bloque } .)
+    $end            reduce using rule 42 (Continuacion -> ELSE IF ( Expression ) { bloque } .)
+    )               reduce using rule 42 (Continuacion -> ELSE IF ( Expression ) { bloque } .)
+    ;               reduce using rule 42 (Continuacion -> ELSE IF ( Expression ) { bloque } .)
+    ,               reduce using rule 42 (Continuacion -> ELSE IF ( Expression ) { bloque } .)
+    ELSE            shift and go to state 98
+
+    Continuacion                   shift and go to state 112
+
+state 112
+
+    (43) Continuacion -> ELSE IF ( Expression ) { bloque } Continuacion .
+    |               reduce using rule 43 (Continuacion -> ELSE IF ( Expression ) { bloque } Continuacion .)
+    &               reduce using rule 43 (Continuacion -> ELSE IF ( Expression ) { bloque } Continuacion .)
+    !               reduce using rule 43 (Continuacion -> ELSE IF ( Expression ) { bloque } Continuacion .)
+    =               reduce using rule 43 (Continuacion -> ELSE IF ( Expression ) { bloque } Continuacion .)
+    >               reduce using rule 43 (Continuacion -> ELSE IF ( Expression ) { bloque } Continuacion .)
+    <               reduce using rule 43 (Continuacion -> ELSE IF ( Expression ) { bloque } Continuacion .)
+    /               reduce using rule 43 (Continuacion -> ELSE IF ( Expression ) { bloque } Continuacion .)
+    *               reduce using rule 43 (Continuacion -> ELSE IF ( Expression ) { bloque } Continuacion .)
+    -               reduce using rule 43 (Continuacion -> ELSE IF ( Expression ) { bloque } Continuacion .)
+    +               reduce using rule 43 (Continuacion -> ELSE IF ( Expression ) { bloque } Continuacion .)
+    WHILE           reduce using rule 43 (Continuacion -> ELSE IF ( Expression ) { bloque } Continuacion .)
+    IF              reduce using rule 43 (Continuacion -> ELSE IF ( Expression ) { bloque } Continuacion .)
+    (               reduce using rule 43 (Continuacion -> ELSE IF ( Expression ) { bloque } Continuacion .)
+    OBJECTID        reduce using rule 43 (Continuacion -> ELSE IF ( Expression ) { bloque } Continuacion .)
+    CHAR_CONST      reduce using rule 43 (Continuacion -> ELSE IF ( Expression ) { bloque } Continuacion .)
+    FLOAT_CONST     reduce using rule 43 (Continuacion -> ELSE IF ( Expression ) { bloque } Continuacion .)
+    INT_CONST       reduce using rule 43 (Continuacion -> ELSE IF ( Expression ) { bloque } Continuacion .)
+    RETURN          reduce using rule 43 (Continuacion -> ELSE IF ( Expression ) { bloque } Continuacion .)
+    PRINT           reduce using rule 43 (Continuacion -> ELSE IF ( Expression ) { bloque } Continuacion .)
+    VOID            reduce using rule 43 (Continuacion -> ELSE IF ( Expression ) { bloque } Continuacion .)
+    CHAR            reduce using rule 43 (Continuacion -> ELSE IF ( Expression ) { bloque } Continuacion .)
+    FLOAT           reduce using rule 43 (Continuacion -> ELSE IF ( Expression ) { bloque } Continuacion .)
+    INT             reduce using rule 43 (Continuacion -> ELSE IF ( Expression ) { bloque } Continuacion .)
+    $end            reduce using rule 43 (Continuacion -> ELSE IF ( Expression ) { bloque } Continuacion .)
+    )               reduce using rule 43 (Continuacion -> ELSE IF ( Expression ) { bloque } Continuacion .)
+    ;               reduce using rule 43 (Continuacion -> ELSE IF ( Expression ) { bloque } Continuacion .)
+    ,               reduce using rule 43 (Continuacion -> ELSE IF ( Expression ) { bloque } Continuacion .)
+
+
+Conflicts:
+
+shift/reduce conflict for WHILE in state 3 resolved as shift
+shift/reduce conflict for IF in state 3 resolved as shift
+shift/reduce conflict for ! in state 3 resolved as shift
+shift/reduce conflict for ( in state 3 resolved as shift
+shift/reduce conflict for OBJECTID in state 3 resolved as shift
+shift/reduce conflict for CHAR_CONST in state 3 resolved as shift
+shift/reduce conflict for FLOAT_CONST in state 3 resolved as shift
+shift/reduce conflict for INT_CONST in state 3 resolved as shift
+shift/reduce conflict for RETURN in state 3 resolved as shift
+shift/reduce conflict for PRINT in state 3 resolved as shift
+shift/reduce conflict for VOID in state 3 resolved as shift
+shift/reduce conflict for CHAR in state 3 resolved as shift
+shift/reduce conflict for FLOAT in state 3 resolved as shift
+shift/reduce conflict for INT in state 3 resolved as shift
+shift/reduce conflict for ! in state 4 resolved as shift
+shift/reduce conflict for WHILE in state 15 resolved as shift
+shift/reduce conflict for IF in state 15 resolved as shift
+shift/reduce conflict for ! in state 15 resolved as shift
+shift/reduce conflict for ( in state 15 resolved as shift
+shift/reduce conflict for OBJECTID in state 15 resolved as shift
+shift/reduce conflict for CHAR_CONST in state 15 resolved as shift
+shift/reduce conflict for FLOAT_CONST in state 15 resolved as shift
+shift/reduce conflict for INT_CONST in state 15 resolved as shift
+shift/reduce conflict for RETURN in state 15 resolved as shift
+shift/reduce conflict for PRINT in state 15 resolved as shift
+shift/reduce conflict for | in state 37 resolved as shift
+shift/reduce conflict for & in state 37 resolved as shift
+shift/reduce conflict for ! in state 37 resolved as shift
+shift/reduce conflict for = in state 37 resolved as shift
+shift/reduce conflict for > in state 37 resolved as shift
+shift/reduce conflict for < in state 37 resolved as shift
+shift/reduce conflict for / in state 37 resolved as shift
+shift/reduce conflict for * in state 37 resolved as shift
+shift/reduce conflict for - in state 37 resolved as shift
+shift/reduce conflict for + in state 37 resolved as shift
+shift/reduce conflict for | in state 38 resolved as shift
+shift/reduce conflict for & in state 38 resolved as shift
+shift/reduce conflict for ! in state 38 resolved as shift
+shift/reduce conflict for = in state 38 resolved as shift
+shift/reduce conflict for > in state 38 resolved as shift
+shift/reduce conflict for < in state 38 resolved as shift
+shift/reduce conflict for / in state 38 resolved as shift
+shift/reduce conflict for * in state 38 resolved as shift
+shift/reduce conflict for - in state 38 resolved as shift
+shift/reduce conflict for + in state 38 resolved as shift
+shift/reduce conflict for | in state 46 resolved as shift
+shift/reduce conflict for & in state 46 resolved as shift
+shift/reduce conflict for ! in state 46 resolved as shift
+shift/reduce conflict for = in state 46 resolved as shift
+shift/reduce conflict for > in state 46 resolved as shift
+shift/reduce conflict for < in state 46 resolved as shift
+shift/reduce conflict for / in state 46 resolved as shift
+shift/reduce conflict for * in state 46 resolved as shift
+shift/reduce conflict for - in state 46 resolved as shift
+shift/reduce conflict for + in state 46 resolved as shift
+shift/reduce conflict for | in state 48 resolved as shift
+shift/reduce conflict for & in state 48 resolved as shift
+shift/reduce conflict for ! in state 48 resolved as shift
+shift/reduce conflict for = in state 48 resolved as shift
+shift/reduce conflict for > in state 48 resolved as shift
+shift/reduce conflict for < in state 48 resolved as shift
+shift/reduce conflict for / in state 48 resolved as shift
+shift/reduce conflict for * in state 48 resolved as shift
+shift/reduce conflict for - in state 48 resolved as shift
+shift/reduce conflict for + in state 48 resolved as shift
+shift/reduce conflict for | in state 49 resolved as shift
+shift/reduce conflict for & in state 49 resolved as shift
+shift/reduce conflict for ! in state 49 resolved as shift
+shift/reduce conflict for = in state 49 resolved as shift
+shift/reduce conflict for > in state 49 resolved as shift
+shift/reduce conflict for < in state 49 resolved as shift
+shift/reduce conflict for / in state 49 resolved as shift
+shift/reduce conflict for * in state 49 resolved as shift
+shift/reduce conflict for - in state 49 resolved as shift
+shift/reduce conflict for + in state 49 resolved as shift
+shift/reduce conflict for | in state 50 resolved as shift
+shift/reduce conflict for & in state 50 resolved as shift
+shift/reduce conflict for ! in state 50 resolved as shift
+shift/reduce conflict for = in state 50 resolved as shift
+shift/reduce conflict for > in state 50 resolved as shift
+shift/reduce conflict for < in state 50 resolved as shift
+shift/reduce conflict for / in state 50 resolved as shift
+shift/reduce conflict for * in state 50 resolved as shift
+shift/reduce conflict for - in state 50 resolved as shift
+shift/reduce conflict for + in state 50 resolved as shift
+shift/reduce conflict for | in state 51 resolved as shift
+shift/reduce conflict for & in state 51 resolved as shift
+shift/reduce conflict for ! in state 51 resolved as shift
+shift/reduce conflict for = in state 51 resolved as shift
+shift/reduce conflict for > in state 51 resolved as shift
+shift/reduce conflict for < in state 51 resolved as shift
+shift/reduce conflict for / in state 51 resolved as shift
+shift/reduce conflict for * in state 51 resolved as shift
+shift/reduce conflict for - in state 51 resolved as shift
+shift/reduce conflict for + in state 51 resolved as shift
+shift/reduce conflict for | in state 59 resolved as shift
+shift/reduce conflict for & in state 59 resolved as shift
+shift/reduce conflict for ! in state 59 resolved as shift
+shift/reduce conflict for = in state 59 resolved as shift
+shift/reduce conflict for > in state 59 resolved as shift
+shift/reduce conflict for < in state 59 resolved as shift
+shift/reduce conflict for / in state 59 resolved as shift
+shift/reduce conflict for * in state 59 resolved as shift
+shift/reduce conflict for - in state 59 resolved as shift
+shift/reduce conflict for + in state 59 resolved as shift
+shift/reduce conflict for | in state 60 resolved as shift
+shift/reduce conflict for & in state 60 resolved as shift
+shift/reduce conflict for ! in state 60 resolved as shift
+shift/reduce conflict for = in state 60 resolved as shift
+shift/reduce conflict for > in state 60 resolved as shift
+shift/reduce conflict for < in state 60 resolved as shift
+shift/reduce conflict for / in state 60 resolved as shift
+shift/reduce conflict for * in state 60 resolved as shift
+shift/reduce conflict for - in state 60 resolved as shift
+shift/reduce conflict for + in state 60 resolved as shift
+shift/reduce conflict for | in state 61 resolved as shift
+shift/reduce conflict for & in state 61 resolved as shift
+shift/reduce conflict for ! in state 61 resolved as shift
+shift/reduce conflict for = in state 61 resolved as shift
+shift/reduce conflict for > in state 61 resolved as shift
+shift/reduce conflict for < in state 61 resolved as shift
+shift/reduce conflict for / in state 61 resolved as shift
+shift/reduce conflict for * in state 61 resolved as shift
+shift/reduce conflict for - in state 61 resolved as shift
+shift/reduce conflict for + in state 61 resolved as shift
+shift/reduce conflict for | in state 62 resolved as shift
+shift/reduce conflict for & in state 62 resolved as shift
+shift/reduce conflict for ! in state 62 resolved as shift
+shift/reduce conflict for = in state 62 resolved as shift
+shift/reduce conflict for > in state 62 resolved as shift
+shift/reduce conflict for < in state 62 resolved as shift
+shift/reduce conflict for / in state 62 resolved as shift
+shift/reduce conflict for * in state 62 resolved as shift
+shift/reduce conflict for - in state 62 resolved as shift
+shift/reduce conflict for + in state 62 resolved as shift
+shift/reduce conflict for | in state 63 resolved as shift
+shift/reduce conflict for & in state 63 resolved as shift
+shift/reduce conflict for ! in state 63 resolved as shift
+shift/reduce conflict for = in state 63 resolved as shift
+shift/reduce conflict for > in state 63 resolved as shift
+shift/reduce conflict for < in state 63 resolved as shift
+shift/reduce conflict for / in state 63 resolved as shift
+shift/reduce conflict for * in state 63 resolved as shift
+shift/reduce conflict for - in state 63 resolved as shift
+shift/reduce conflict for + in state 63 resolved as shift
+shift/reduce conflict for | in state 64 resolved as shift
+shift/reduce conflict for & in state 64 resolved as shift
+shift/reduce conflict for ! in state 64 resolved as shift
+shift/reduce conflict for = in state 64 resolved as shift
+shift/reduce conflict for > in state 64 resolved as shift
+shift/reduce conflict for < in state 64 resolved as shift
+shift/reduce conflict for / in state 64 resolved as shift
+shift/reduce conflict for * in state 64 resolved as shift
+shift/reduce conflict for - in state 64 resolved as shift
+shift/reduce conflict for + in state 64 resolved as shift
