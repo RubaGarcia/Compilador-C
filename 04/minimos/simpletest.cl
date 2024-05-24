@@ -1,8 +1,8 @@
-int const(){
+int constante(){
     int i = 0;
-    if (i == 1){
+    if (i == 1) {
         printf("Hola");
-    }else{
+    } else {
         printf("Adios");
     }
 }

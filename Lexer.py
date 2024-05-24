@@ -11,7 +11,8 @@ class CLexer(Lexer):
         DOUBLE, ELSE, ENUM, EXTERN, FLOAT, FOR, GOTO, IF, INT,                                      # type: ignore
         LONG, REGISTER, RETURN, SHORT, SIGNED, SIZEOF, STATIC,                                      # type: ignore
         STRUCT, SWITCH, TYPEDEF, UNION, UNSIGNED, VOID, VOLATILE, WHILE                             # type: ignore
-        , FLOAT_CONST,  INT_CONST, CHAR_CONST, OBJECTID, PRINT, STRING                                          # type: ignore 
+        , FLOAT_CONST,  INT_CONST, CHAR_CONST, OBJECTID, PRINT, STRING                              # type: ignore
+        , EQ, LE, GE, NE, AND, OR                                                                   # type: ignore 
         # , INCLUDE, LIBRARY                          
         }
         
@@ -90,6 +91,14 @@ class CLexer(Lexer):
 
     OBJECTID = r'[a-zA-Z_][a-zA-Z0-9_]*'
     
+    #OPERADORES
+    EQ = r'=='
+    LE = r'<='
+    GE = r'>='
+    NE = r'!='
+    AND = r'&&'
+    OR = r'\|\|'
+
 
     
     # INCLUDE = r'\#include'
